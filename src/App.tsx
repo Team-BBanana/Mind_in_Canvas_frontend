@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import CanvasPage from "@/pages/Canvas/CanvasPage.tsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import LoginPage from "@/pages/Login/LoginPage.tsx";
+import SignupPage from "@/pages/Signup/SignupPage.tsx";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <RecoilRoot>
+            <BrowserRouter>
+                <div style={{ top: '-6px', left: '-6px', position: 'relative' }}>
+                    <Routes>
+                        <Route path="/canvas" element={<CanvasPage />} />
+                        <Route path="/login" element={<LoginPage  />} />
+                        <Route path="/signup" element={<SignupPage  />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        </RecoilRoot>
+    );
 }
 
-export default App
+export default App;
