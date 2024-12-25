@@ -1,10 +1,3 @@
-import { atom } from "recoil";
+import { activeToolAtom } from '@/store/atoms';
 
-type ToolType = "select" | "pen" | "stickyNote" | "image" | "eraser" | "hand";
-
-const activeToolState = atom<ToolType>({
-  key: "activeToolState",
-  default: "pen"
-});
-
-export default activeToolState;
+export default activeToolAtom;
