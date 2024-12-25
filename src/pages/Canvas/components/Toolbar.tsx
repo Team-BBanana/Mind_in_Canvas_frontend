@@ -53,8 +53,6 @@ const Toolbar = () => {
     canvas.isDrawingMode = true;
   };
 
-
-
   const handleEraser = () => {
     if (!(canvas instanceof fabric.Canvas)) return;
 

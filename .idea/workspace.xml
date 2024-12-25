@@ -4,25 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="518ee1ce-a1d5-49cd-8577-59d5174cf6b2" name="변경" comment="feat : Tool Button 컴포넌트 추가">
-      <change afterPath="$PROJECT_DIR$/src/assets/svgs/XL.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/svgs/user.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Canvas/CanvasPage.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Canvas/CanvasPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Canvas/components/CanvasSection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Canvas/components/ColorPanel.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Canvas/components/Header.tsx" afterDir="false" />
+    <list default="true" id="518ee1ce-a1d5-49cd-8577-59d5174cf6b2" name="변경" comment="feat : Header 컴포넌트분리">
+      <change afterPath="$PROJECT_DIR$/src/components/recycleComponent/Button/Button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/recycleComponent/InputBox/InputBox.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/recycleComponent/InputBox/InputBox.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Login/LoginPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Login/component/LoginComponent.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Login/component/LoginComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Signup/SignupPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Signup/component/SignupComponent.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Signup/component/SingupComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/canvasPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stores/stateInstructorSocketRef.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stores/stateIsQuestionLogOpen.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.node.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.node.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Canvas/components/Toolbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Canvas/components/Toolbar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +28,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -85,16 +81,16 @@
       <window_info id="Merge Requests" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.17578125" />
-      <window_info active="true" id="Commit" order="1" visible="true" weight="0.17578125" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2513021" />
+      <window_info id="Commit" order="1" weight="0.1549479" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="File Transfer" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="0" visible="true" weight="0.33234042" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.18595745" />
       <window_info anchor="bottom" id="Problems" order="1" />
-      <window_info anchor="bottom" id="Problems View" order="2" weight="0.33234042" />
+      <window_info active="true" anchor="bottom" id="Problems View" order="2" visible="true" weight="0.18595745" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.32978725" />
       <window_info anchor="bottom" id="Services" order="4" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.32978725" />
@@ -105,7 +101,7 @@
       <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
       <window_info anchor="right" id="Endpoints" order="5" weight="0.40703124" />
-      <window_info active="true" anchor="right" x="-1838" y="70" width="1838" height="387" id="Terminal" order="6" side_tool="true" visible="true" weight="0.3174479" />
+      <window_info active="true" anchor="right" x="-1838" y="70" width="1838" height="387" id="Terminal" order="6" side_tool="true" visible="true" weight="0.22630209" />
     </layout>
   </component>
   <component name="RecentsManager">
@@ -113,6 +109,10 @@
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/pages" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/Login/component" />
+      <recent name="$PROJECT_DIR$/src/pages/Signup/component" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -134,7 +134,8 @@
       <workItem from="1734967057809" duration="2297000" />
       <workItem from="1734969532719" duration="5033000" />
       <workItem from="1735015395050" duration="10620000" />
-      <workItem from="1735032390697" duration="25029000" />
+      <workItem from="1735032390697" duration="26189000" />
+      <workItem from="1735116569593" duration="4242000" />
     </task>
     <task id="LOCAL-00001" summary="feat : 캔버스 기본 요소 이미지 추가">
       <option name="closed" value="true" />
@@ -216,11 +217,62 @@
       <option name="project" value="LOCAL" />
       <updated>1735112928646</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat : Canvas 라우팅 경로 지정">
+      <option name="closed" value="true" />
+      <created>1735114600841</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1735114600841</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat : Canvas 래핑 컴포넌트 구현">
+      <option name="closed" value="true" />
+      <created>1735114624614</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1735114624614</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat : Canvas 섹션 페이지 구현">
+      <option name="closed" value="true" />
+      <created>1735114643758</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1735114643758</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat : Canvas 컬러패널 구현">
+      <option name="closed" value="true" />
+      <created>1735114653485</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1735114653485</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat : Header 컴포넌트분리">
+      <option name="closed" value="true" />
+      <created>1735114682760</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1735114682760</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat : 캔버스 기본 요소 이미지 추가" />
@@ -233,6 +285,11 @@
     <MESSAGE value="feat : isQuestionLogOpenState 리코일 상태정의 분리" />
     <MESSAGE value="feat : ToolBar 컴포넌트 추가" />
     <MESSAGE value="feat : Tool Button 컴포넌트 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : Tool Button 컴포넌트 추가" />
+    <MESSAGE value="feat : Canvas 라우팅 경로 지정" />
+    <MESSAGE value="feat : Canvas 래핑 컴포넌트 구현" />
+    <MESSAGE value="feat : Canvas 섹션 페이지 구현" />
+    <MESSAGE value="feat : Canvas 컬러패널 구현" />
+    <MESSAGE value="feat : Header 컴포넌트분리" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : Header 컴포넌트분리" />
   </component>
 </project>
