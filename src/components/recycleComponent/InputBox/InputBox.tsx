@@ -1,22 +1,21 @@
-import { ChangeEvent, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import style from "./InputBox.module.css"
 
 interface InputProps {
     type: string;
     id: string;
     name: string;
-    label: string;
     value: string;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     required?: boolean;
+    placeholder?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(({
-    type, id, name, label, value, onChange, required = false}, ref) => {
+    type, id, name, value, onChange, required = false, placeholder}, ref) => {
 
     return (
         <div className={style.inputBoxContainer} >
-            <label htmlFor={id}>{label} :</label>
             <input className={style.inputBox}
                    type={type}
                    id={id}
@@ -25,6 +24,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
                    onChange={onChange}
                    ref={ref}
                    required={required}
+                   placeholder={placeholder}
             />
         </div>
     );

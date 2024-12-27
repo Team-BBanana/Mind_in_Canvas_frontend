@@ -36,20 +36,14 @@ const LoginComponent: React.FC<LoginProps> = ({ errormsg, success, onClickSubmit
         onClickSubmit({ email, password });
     };
 
-    // const handleClick = (path: string) => {
-    //     router.push(path);
-    // };
-
     return (
         <div className={style.loginContainer}>
-            <h2>로그인</h2>
-
             <form onSubmit={handleSubmit} className={style.formContainer}>
                 <Input
                     type="email"
                     id="email"
                     name="email"
-                    label="email"
+                    placeholder="이메일"
                     value={formData.email}
                     onChange={handleChange}
                     ref={emailRef}
@@ -59,21 +53,34 @@ const LoginComponent: React.FC<LoginProps> = ({ errormsg, success, onClickSubmit
                     type="password"
                     id="password"
                     name="password"
-                    label="password"
+                    placeholder="비밀번호"
                     value={formData.password}
                     onChange={handleChange}
                     ref={passwordRef}
                     required
                 />
+                <div className={style.checkboxContainer}>
+                    <input type="checkbox" id="stayLoggedIn" />
+                    <span className={style.checkboxLabel}>로그인 상태 유지</span>
+                </div>
 
                 {errormsg && <p className="error" style={{ whiteSpace: 'pre-wrap' }}>{errormsg}</p>}
                 {success && <p className="success">{success}</p>}
                 <div className={style.buttonContainer}>
-                    <Button type="submit">로그인</Button>
-                    {/*<Button type="button" onClick={() => handleClick("/signup")}>회원가입</Button>*/}
+                    <Button type="submit" className={style.loginButton}>로그인</Button>
+                </div>
+                <div className={style.signInContainer}>    
+                    <div className={style.googleSignIn}>
+                        <button className={style.googleButton}>
+                            <img src="/src/assets/imgs/web_neutral_rd_SI.png"></img>
+                        </button>
+                    </div>
+                    <div className={style.options}>
+                        <a href="#">회원가입</a>
+                        <a href="#">비밀번호 찾기</a>
+                    </div>
                 </div>
             </form>
-
         </div>
     );
 }
