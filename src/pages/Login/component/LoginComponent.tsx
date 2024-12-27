@@ -76,7 +76,7 @@ const LoginComponent: React.FC<LoginProps> = ({ errormsg, success, onClickSubmit
                         </button>
                     </div>
                     <div className={style.options}>
-                        <a href="#">회원가입</a>
+                        <a href="/signup">회원가입</a>
                         <a href="#">비밀번호 찾기</a>
                     </div>
                 </div>
