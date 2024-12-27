@@ -6,17 +6,17 @@ import EraserCursor from "@/assets/svgs/eraserMouseCursor.svg";
 
 import { fabric } from "fabric";
 import { useEffect } from "react";
-import { useRecoilValue,useRecoilState } from "recoil";
 
 import ToolButton from "./ToolButton";
 import ColorPanel from "./ColorPanel";
 
-import activeToolState from "./stateActiveTool";
-import canvasInstanceState from "./stateCanvasInstance";
+import activeToolAtom from "./stateActiveTool";
+import canvasInstanceAtom from "./stateCanvasInstance";
+import { useAtom, useAtomValue } from "jotai";
 
 const Toolbar = () => {
-  const [activeTool, setActiveTool] = useRecoilState(activeToolState);
-  const canvas = useRecoilValue(canvasInstanceState);
+  const [activeTool, setActiveTool] = useAtom(activeToolAtom);
+  const canvas = useAtomValue(canvasInstanceAtom);
 
   /**
    * @description 화이트 보드에 그려져 있는 요소들을 클릭을 통해 선택 가능한지 여부를 제어하기 위한 함수입니다.
@@ -139,15 +139,7 @@ const Toolbar = () => {
   return (
         <div className="absolute top-2.5 left-2.5  z-10 bg-white p-2 rounded shadow-lg">
           {/*<div className="flex flex-col items-center justify-center p-2 w-12 gap-1 rounded-xl bg-grayscale-lightgray border border-grayscale-lightgray shadow-md ">*/}
-          <div>
-            <ToolButton
-                icon={MouseIcon}
-                onClick={() => {
-                  setActiveTool("select");
-                }}
-                disabled={activeTool === "select"}
-                title="Select Tool"
-            />
+          <div style={ { display: "flex", justifyContent: "space-between", alignItems: "center" , gap : "8px"}}>
             <ToolButton
                 icon={PenIcon}
                 onClick={() => {
@@ -156,7 +148,7 @@ const Toolbar = () => {
                 disabled={activeTool === "pen"}
                 title="Pen Tool"
             />
-            <ColorPanel className={`${activeTool === "pen" ? "block" : "hidden"}`}/>
+
             <ToolButton
                 icon={EraserIcon}
                 onClick={() => {
@@ -166,6 +158,14 @@ const Toolbar = () => {
                 title="Eraser Tool"
             />
             <ToolButton
+                icon={MouseIcon}
+                onClick={() => {
+                  setActiveTool("select");
+                }}
+                disabled={activeTool === "select"}
+                title="Select Tool"
+            />
+            <ToolButton
                 icon={HandIcon}
                 onClick={() => {
                   setActiveTool("hand");
@@ -173,6 +173,7 @@ const Toolbar = () => {
                 disabled={activeTool === "hand"}
                 title="Hand Tool"
             />
+            <ColorPanel className={`${activeTool === "pen" ? "block" : "hidden"}`}/>
           </div>
         </div>
   );

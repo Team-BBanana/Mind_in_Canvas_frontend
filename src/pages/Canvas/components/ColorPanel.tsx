@@ -1,94 +1,38 @@
-import CheckIcon from "@/assets/svgs/check.svg?react";
-import { useRecoilValue } from "recoil";
-import { useEffect, useState } from "react";
+
 import { fabric } from "fabric";
-import cavasInstanceState from "./stateCanvasInstance";
+import { useEffect, useState } from "react";
+import { useAtomValue } from "jotai";
+import canvasInstanceAtom from "./stateCanvasInstance";
+import ColorButton, { PenColorTypes, COLOR_CODE } from "./ColorButton";
 
-type PenColorTypes = "red" | "yellow" | "forsythia" | "lightGreen" | "blue" | "black";
+interface ColorPanelProps {
+  className: string;
+}
 
-const COLOR_CODE = {
-  red: "#DF5536",
-  yellow: "#F2C947",
-  forsythia: "#FCF467",
-  lightGreen: "#D3E660",
-  blue: "#5099E9",
-  black: "#000000"
-};
+const COLORS: PenColorTypes[] = ["red", "orange", "yellow", "green", "blue", "indigo", "purple", "black"];
 
-const ColorPanel = ({ className }: { className: string }) => {
-  const canvas = useRecoilValue(cavasInstanceState);
+const ColorPanel: React.FC<ColorPanelProps> = ({ className }) => {
+  const canvas = useAtomValue(canvasInstanceAtom);
   const [penColor, setPenColor] = useState<PenColorTypes>("black");
 
   useEffect(() => {
     if (!(canvas instanceof fabric.Canvas)) return;
     canvas.freeDrawingBrush.color = COLOR_CODE[penColor];
-  }, [penColor]);
+  }, [canvas, penColor]);
 
   return (
-    <div
-      className={`${className} shadow-md flex flex-col gap-2 p-2 rounded-xl bg-grayscale-lightgray absolute top-0 left-[3.875rem] `}
-    >
-      <button
-        className="w-6  h-6  rounded-[0.625rem] bg-pen-red border border-pen-border-red flex justify-center items-center	"
-        type="button"
-        aria-label="빨간색 펜"
-        onClick={() => {
-          setPenColor("red");
-        }}
-      >
-        <CheckIcon className={`${penColor === "red" ? "" : "hidden"}`} />
-      </button>
-      <button
-        className="w-6 h-6  rounded-[0.625rem] bg-pen-yellow border border-pen-border-yellow flex justify-center items-center"
-        type="button"
-        aria-label="노란색 펜"
-        onClick={() => {
-          setPenColor("yellow");
-        }}
-      >
-        <CheckIcon className={`${penColor === "yellow" ? "" : "hidden"}`} />
-      </button>
-      <button
-        className="w-6 h-6  rounded-[0.625rem] bg-pen-forsythia border border-pen-border-forsythia flex justify-center items-center"
-        type="button"
-        aria-label="개나리색 펜"
-        onClick={() => {
-          setPenColor("forsythia");
-        }}
-      >
-        <CheckIcon className={`${penColor === "forsythia" ? "" : "hidden"}`} />
-      </button>
-      <button
-        className="w-6 h-6  rounded-[0.625rem] bg-pen-lightgreen border border-pen-border-lightgreen flex justify-center items-center"
-        type="button"
-        aria-label="연두색 펜"
-        onClick={() => {
-          setPenColor("lightGreen");
-        }}
-      >
-        <CheckIcon className={`${penColor === "lightGreen" ? "" : "hidden"}`} />
-      </button>
-      <button
-        className="w-6 h-6  rounded-[0.625rem] bg-pen-blue border border-pen-border-blue flex justify-center items-center"
-        type="button"
-        aria-label="파란색 펜"
-        onClick={() => {
-          setPenColor("blue");
-        }}
-      >
-        <CheckIcon className={`${penColor === "blue" ? "" : "hidden"}`} />
-      </button>
-      <button
-        className="w-6 h-6  rounded-[0.625rem] bg-grayscale-black border border-grayscale-black  flex justify-center items-center"
-        type="button"
-        aria-label="검은색 펜"
-        onClick={() => {
-          setPenColor("black");
-        }}
-      >
-        <CheckIcon className={`${penColor === "black" ? "" : "hidden"}`} />
-      </button>
-    </div>
+      <div className="fixed bottom-0 left-0 w-full flex justify-center items-center p-4 z-50">
+        <div className={`${className} bg-white rounded-full shadow-lg p-3 flex gap-2`}>
+          {COLORS.map((color) => (
+              <ColorButton
+                  key={color}
+                  color={color}
+                  penColor={penColor}
+                  setPenColor={setPenColor}
+              />
+          ))}
+        </div>
+      </div>
   );
 };
 
