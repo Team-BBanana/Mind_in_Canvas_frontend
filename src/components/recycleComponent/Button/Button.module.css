@@ -1,6 +1,11 @@
-.button-container {
-    display: flex;
-    gap: 5px; /* 버튼 사이에 5px 간격 */
-    justify-content: flex-start; /* 필요에 따라 정렬 (flex-start, center, space-between 등) */
-    align-items: center; /* 버튼의 세로 정렬 조정 */
+.buttonContainer {
+    padding: 10px;
+    background-color: #feb913;
+    color: #424242;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
+.buttonContainer:hover {
+    background-color: #f6821f;

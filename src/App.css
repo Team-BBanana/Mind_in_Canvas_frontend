@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Moirai+One&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+ #root {
+    background: white;
+    font-family: "Noto Sans KR", serif;
+    color:  #424242;
+}
+
+button {    
+    font-family: "Noto Sans KR", serif;
+}

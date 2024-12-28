@@ -1,0 +1,11 @@
+.header {
+    background-color: #feb913;
+    color: 	#424242;
+    text-align: left;
+    font-family: 'Moirai One';
+    font-size: large;
+    padding-left: 100px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
