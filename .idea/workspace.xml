@@ -5,20 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="518ee1ce-a1d5-49cd-8577-59d5174cf6b2" name="변경" comment="Refactor : 전역 상태 관리 Recoil -&gt; Jotai 로 변경">
-      <change afterPath="$PROJECT_DIR$/src/pages/Canvas/components/BannerSection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Canvas/components/ColorButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/atoms/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/user.api/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/user.api/user.api.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Main/MainPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Main/component/MainComponent.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Main/component/MainComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/recycleComponent/Button/Button.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/recycleComponent/Button/Button.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/recycleComponent/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/recycleComponent/Button/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Canvas/components/CanvasSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Canvas/components/CanvasSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Canvas/components/ColorPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Canvas/components/ColorPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Canvas/components/Toolbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Canvas/components/Toolbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Canvas/components/stateActiveTool.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Canvas/components/stateActiveTool.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Canvas/components/stateCanvasInstance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Canvas/components/stateCanvasInstance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Canvas/components/BannerSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Canvas/components/BannerSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login/component/LoginComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/component/LoginComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Signup/SignupPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Signup/SignupPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Signup/component/SignupComponent.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Signup/component/SignupComponent.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Signup/component/SingupComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Signup/component/SingupComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,8 +85,8 @@
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="npm" side_tool="true" />
       <window_info id="Pull Requests" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21588542" />
-      <window_info id="Commit" order="1" weight="0.21588542" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.07630208" />
+      <window_info active="true" id="Commit" order="1" visible="true" weight="0.23515625" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" />
@@ -92,18 +94,18 @@
       <window_info anchor="bottom" id="File Transfer" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.18595745" />
       <window_info anchor="bottom" id="Problems" order="1" />
-      <window_info active="true" anchor="bottom" id="Problems View" order="2" visible="true" weight="0.13914894" />
+      <window_info active="true" anchor="bottom" id="Problems View" order="2" visible="true" weight="0.05319149" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.32978725" />
       <window_info anchor="bottom" id="Services" order="4" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.32978725" />
       <window_info anchor="right" id="Coverage" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
       <window_info anchor="right" id="AIAssistant" order="1" weight="0.25" />
-      <window_info anchor="right" id="Database" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="2" weight="0.34817708" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
       <window_info anchor="right" id="Endpoints" order="5" weight="0.40703124" />
-      <window_info active="true" anchor="right" x="-1838" y="76" width="1838" height="387" id="Terminal" order="6" side_tool="true" visible="true" weight="0.30807292" />
+      <window_info active="true" anchor="right" x="-1838" y="76" width="1838" height="387" id="Terminal" order="6" side_tool="true" visible="true" weight="0.2408854" />
     </layout>
   </component>
   <component name="RecentsManager">
@@ -139,6 +141,11 @@
       <workItem from="1735032390697" duration="26189000" />
       <workItem from="1735116569593" duration="12244000" />
       <workItem from="1735138750252" duration="605000" />
+      <workItem from="1735178464151" duration="10725000" />
+      <workItem from="1735261471137" duration="1775000" />
+      <workItem from="1735294777967" duration="1345000" />
+      <workItem from="1735303319311" duration="606000" />
+      <workItem from="1735308055373" duration="1311000" />
     </task>
     <task id="LOCAL-00001" summary="feat : 캔버스 기본 요소 이미지 추가">
       <option name="closed" value="true" />
@@ -316,7 +323,71 @@
       <option name="project" value="LOCAL" />
       <updated>1735143815903</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Refactor : 전역 상태 관리 Recoil -&gt; Jotai 로 변경">
+      <option name="closed" value="true" />
+      <created>1735144365330</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1735144365330</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat : 상단 툴바 컴포넌트 분리">
+      <option name="closed" value="true" />
+      <created>1735144404583</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1735144404583</updated>
+    </task>
+    <task id="LOCAL-00025" summary="feat : 버튼에 스타일 파라미터 추가">
+      <option name="closed" value="true" />
+      <created>1735144486316</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1735144486316</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Refactor : 전역 상태 관리 Recoil -&gt; Jotai 로 변경 및 Bannersection 추가">
+      <option name="closed" value="true" />
+      <created>1735144518288</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1735144518288</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Refactor : 색깔 버튼 스타일 변경">
+      <option name="closed" value="true" />
+      <created>1735144555122</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1735144555122</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Refactor : 색깔 패널 Map 으로 중복 코드 최적화">
+      <option name="closed" value="true" />
+      <created>1735144579102</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1735144579102</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Refactor : 전역 상태 관리 Recoil -&gt; Jotai 로 변경">
+      <option name="closed" value="true" />
+      <created>1735144587477</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1735144587477</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Refactor : 전역 상태 관리 Recoil -&gt; Jotai 로 변경">
+      <option name="closed" value="true" />
+      <created>1735144595455</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1735144595455</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,7 +405,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat : 캔버스 기본 요소 이미지 추가" />
     <MESSAGE value="Refactor : 이전 설정 삭제" />
     <MESSAGE value="feat : 캔버스 기본 라우트 경로 설정" />
     <MESSAGE value="Refactor : 기존 설정 삭제" />
@@ -354,6 +424,11 @@
     <MESSAGE value="feat : SignupComponent.tsx, 및 SignupPage.tsx 구현" />
     <MESSAGE value="feat : Login 및 Signup 라우팅 경로 설정" />
     <MESSAGE value="feat : ButtonComponent Css 추가" />
+    <MESSAGE value="feat : 상단 툴바 컴포넌트 분리" />
+    <MESSAGE value="feat : 버튼에 스타일 파라미터 추가" />
+    <MESSAGE value="Refactor : 전역 상태 관리 Recoil -&gt; Jotai 로 변경 및 Bannersection 추가" />
+    <MESSAGE value="Refactor : 색깔 버튼 스타일 변경" />
+    <MESSAGE value="Refactor : 색깔 패널 Map 으로 중복 코드 최적화" />
     <MESSAGE value="Refactor : 전역 상태 관리 Recoil -&gt; Jotai 로 변경" />
     <option name="LAST_COMMIT_MESSAGE" value="Refactor : 전역 상태 관리 Recoil -&gt; Jotai 로 변경" />
   </component>
