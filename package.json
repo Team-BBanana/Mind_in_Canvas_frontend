@@ -10,15 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.6.2",
+    "axios": "^1.7.9",
     "dotenv": "^16.3.1",
     "fabric": "^5.3.0",
+    "jotai": "^2.11.0",
     "modernizr": "^3.13.0",
     "pako": "^2.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.18.0",
-    "recoil": "^0.7.7",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
     "toolbar": "^0.0.5",

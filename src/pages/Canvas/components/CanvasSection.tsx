@@ -1,14 +1,14 @@
 import { fabric } from "fabric";
-import { useRecoilState } from "recoil";
 import { useEffect, useRef } from "react";
+import { useAtom } from "jotai";
 
-import Toolbar from "./Toolbar";
 
-import canvasInstanceState from "./stateCanvasInstance";
+import canvasInstanceAtom from "./stateCanvasInstance";
+import BannerSection from "@/pages/Canvas/components/BannerSection.tsx";
 
 const CanvasSection = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
-  const [canvas, setCanvas] = useRecoilState(canvasInstanceState);
+  const [canvas, setCanvas] = useAtom(canvasInstanceAtom);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -19,12 +19,16 @@ const CanvasSection = () => {
     // 캔버스 생성
     const newCanvas = new fabric.Canvas(canvasRef.current, {
       width: window.outerWidth, // 화면 전체 너비
-      height: window.outerHeight // 화면 전체 높이
+      height: window.outerHeight, // 화면 전체 높이
+      backgroundColor: "white"
     });
 
     setCanvas(newCanvas);
 
-    newCanvas.backgroundColor = "white";
+    // 초기 설정
+    newCanvas.freeDrawingBrush.width = 10;
+    newCanvas.isDrawingMode = true;
+    newCanvas.renderAll(); // 변경사항 즉시 반영
 
     // 휠을 이용해서 줌인/줌아웃
     // newCanvas.on("mouse:wheel", (opt) => {
@@ -90,7 +94,8 @@ const CanvasSection = () => {
 
   return (
       <div ref={canvasContainerRef} >
-        <Toolbar />
+
+        <BannerSection/>
         <canvas ref={canvasRef}/>
         {/*{isEditPanelVisible && <StickyNoteEditPanel />}*/}
       </div>
