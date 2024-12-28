@@ -3,7 +3,6 @@ import Toolbar from "@/pages/Canvas/components/Toolbar.tsx";
 
 const BannerSection = () => {
 
-            {/* 가운데 툴바 */}
     return (
         <div
             style={{
@@ -18,6 +17,7 @@ const BannerSection = () => {
                 뒤로
             </Button>
 
+            {/* 가운데 툴바 */}
             <div style={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
                 <Toolbar />
             </div>

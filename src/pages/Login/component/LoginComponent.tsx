@@ -2,6 +2,7 @@ import {ChangeEvent, FormEvent, useRef, useState} from "react";
 import style from "./LoginComponent.module.css"
 import Input from "@/components/recycleComponent/InputBox/InputBox.tsx";
 import Button from "@/components/recycleComponent/Button/Button.tsx";
+import { useNavigate } from "react-router-dom";
 
 
 interface FormData {
@@ -18,6 +19,8 @@ interface LoginProps {
 const LoginComponent: React.FC<LoginProps> = ({ errormsg, success, onClickSubmit }) => {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+    const navigate = useNavigate();
+
 
     const [formData, setFormData] = useState<FormData>({
         email: '',
@@ -34,6 +37,18 @@ const LoginComponent: React.FC<LoginProps> = ({ errormsg, success, onClickSubmit
         const email = emailRef.current?.value || "";
         const password = passwordRef.current?.value || "";
         onClickSubmit({ email, password });
+    };
+
+    const handleClick = (path: string) => {
+        navigate(path);
+    };
+
+    const handleClickGoogleLogin = (path: string) => {
+        window.location.href = path;
+    };
+
+    const handleClickLogout = (path: string) => {
+        window.location.href = path;
     };
 
     return (
@@ -71,12 +86,12 @@ const LoginComponent: React.FC<LoginProps> = ({ errormsg, success, onClickSubmit
                 </div>
                 <div className={style.signInContainer}>    
                     <div className={style.googleSignIn}>
-                        <button className={style.googleButton}>
+                        <Button className={style.googleButton} handleClickGoogleLogin("http://127.0.0.1:8080/oauth2/authorization/google")}>
                             <img src="/src/assets/imgs/web_neutral_rd_SI.png"></img>
-                        </button>
+                        </Button>
                     </div>
                     <div className={style.options}>
-                        <a href="/signup">회원가입</a>
+                        <a href="/signup" onClick={() => handleClick("/signup")} >회원가입</a>
                         <a href="#">비밀번호 찾기</a>
                     </div>
                 </div>
