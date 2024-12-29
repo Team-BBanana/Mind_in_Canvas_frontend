@@ -6,3 +6,8 @@
     font-family: "Noto Sans KR", serif;
     color:  #424242;
 }
+
+.main-content {
+    margin-top: 60px;
+    padding: 20px;
+}

@@ -1,23 +1,43 @@
+// App.tsx
 import './App.css';
+import { Routes, Route } from "react-router-dom";
 import CanvasPage from "@/pages/Canvas/CanvasPage.tsx";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "@/pages/Login/LoginPage.tsx";
 import SignupPage from "@/pages/Signup/SignupPage.tsx";
 import MainPage from "@/pages/Main/MainPage.tsx";
+import Header from './components/recycleComponent/Header/Header.tsx'; // Header import
+import { useLocation } from 'react-router-dom'; // useLocation import
+import SelectKidsPage from './pages/SelectKids/SelectKidsPage.tsx';
+import DisplayPage from './pages/Display/DisplayPage.tsx';
 
 function App() {
+    const location = useLocation(); // 현재 경로를 가져옴
+    const hiddenHeaderRoutes = ['/canvas']; // Header를 숨길 경로 설정
+
     return (
-            <BrowserRouter>
-                <div >
+        <div>
+            {/* 조건부 Header 렌더링 */}
+            {!hiddenHeaderRoutes.includes(location.pathname) && <Header />}
+            
+            {/* Main content container */}
+            {location.pathname === '/canvas' ? (
+                <Routes>
+                    <Route path="/canvas" element={<CanvasPage />} />
+                </Routes>
+            ) : (
+                <div className="main-content">
                     <Routes>
-                        <Route path="/" element={<MainPage/>} />
-                        <Route path="/canvas" element={<CanvasPage/>} />
-                        <Route path="/login" element={<LoginPage/>} />
-                        <Route path="/signup" element={<SignupPage/>} />
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="/canvas" element={<CanvasPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/signup" element={<SignupPage />} />
+                        <Route path="/selectkids" element={<SelectKidsPage/>} />
+                        <Route path="/display/:id" element={<DisplayPage />} />
                     </Routes>
                 </div>
-            </BrowserRouter>
-    );
+            )}
+        </div>
+    ); 
 }
 
 export default App;

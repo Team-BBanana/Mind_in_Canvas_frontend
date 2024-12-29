@@ -1,16 +1,27 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import style from "./MainComponent.module.css";
+import CardComponent from "./CardComponent";
+import { cardData } from "./cardData";
 
 const MainComponent: React.FC = () => {
-    const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
+    const navigate = useNavigate();
 
     return (
-        <div>
-            <h1>메인 페이지</h1>
-            <div>
-                {/* 버튼 추가 */}
-                <button onClick={() => navigate("/login")}>로그인</button>
-                <button onClick={() => navigate("/canvas")}>캔버스</button>
+        <div className={style.container}>
+            <div className={style.cardGrid}>
+                {cardData.map((card, index) => (
+                    <CardComponent
+                        key={index}
+                        imageUrl={card.imageUrl}
+                        title={card.title}
+                        onClick={() => navigate(`/display/${index + 1}`)}
+                    />
+                ))}
+                <CardComponent
+                    isAddButton={true}
+                    onClick={() => navigate('/canvas')}
+                />
             </div>
         </div>
     );
