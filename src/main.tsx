@@ -6,7 +6,6 @@ import Footer from './components/recycleComponent/Footer/Footer.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <Header/>
         <App />
   </StrictMode>,
 )

@@ -2,24 +2,20 @@ import { fabric } from "fabric";
 import { useEffect, useRef } from "react";
 import { useAtom } from "jotai";
 
-
 import canvasInstanceAtom from "./stateCanvasInstance";
 import BannerSection from "@/pages/Canvas/components/BannerSection.tsx";
 
 const CanvasSection = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const [canvas, setCanvas] = useAtom(canvasInstanceAtom);
-
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!canvasContainerRef.current || !canvasRef.current) return;
 
-    // const canvasContainer = canvasContainerRef.current;
-    // 캔버스 생성
     const newCanvas = new fabric.Canvas(canvasRef.current, {
-      width: window.outerWidth, // 화면 전체 너비
-      height: window.outerHeight, // 화면 전체 높이
+      width: window.outerWidth,
+      height: window.outerHeight,
       backgroundColor: "white"
     });
 
@@ -28,7 +24,7 @@ const CanvasSection = () => {
     // 초기 설정
     newCanvas.freeDrawingBrush.width = 10;
     newCanvas.isDrawingMode = true;
-    newCanvas.renderAll(); // 변경사항 즉시 반영
+    newCanvas.renderAll();
 
     // 휠을 이용해서 줌인/줌아웃
     // newCanvas.on("mouse:wheel", (opt) => {
@@ -86,19 +82,16 @@ const CanvasSection = () => {
       }
     };
 
-
     return () => {
       window.removeEventListener("keyup", handleDelete);
     };
   }, [canvas]);
 
   return (
-      <div ref={canvasContainerRef} >
-
-        <BannerSection/>
-        <canvas ref={canvasRef}/>
-        {/*{isEditPanelVisible && <StickyNoteEditPanel />}*/}
-      </div>
+    <div ref={canvasContainerRef} className="canvas-section">
+      <BannerSection />
+      <canvas ref={canvasRef} />
+    </div>
   );
 };
 

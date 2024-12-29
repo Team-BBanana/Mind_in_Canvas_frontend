@@ -49,6 +49,7 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
             <div className = {style.content}>
                 <div>
                     <form onSubmit={handleSubmit} className={style.formContainer}>
+                        <h1>회원가입</h1>
                         <Input
                             type="name"
                             id="username"
@@ -93,7 +94,7 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
                         {errormsg && <p className="error" style={{ whiteSpace: 'pre-wrap' }}>{errormsg}</p>}
                         {success && <p className="success">{success}</p>}
                         <div className={style.buttonContainer}>
-                            <Button type="submit">회원가입</Button>
+                            <Button type="submit" style={{marginTop: "30px", width:"100%", }}>회원가입</Button>
                         </div>
                     </form>
                 </div>

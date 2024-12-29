@@ -3,7 +3,7 @@ import style from "./LoginComponent.module.css"
 import Input from "@/components/recycleComponent/InputBox/InputBox.tsx";
 import Button from "@/components/recycleComponent/Button/Button.tsx";
 import { useNavigate } from "react-router-dom";
-import GoogleSigninIcon  from '@/assets/imgs/googleSIgnin.svg?react';
+import GoogleSigninIcon  from '@/assets/imgs/googleSignin.svg?react';
 import Logo from '@/assets/imgs/textLogo.png';
 import Mind_in_canvas from '@/assets/imgs/mindincanvas_logo.png';
 import Footer from "@/components/recycleComponent/Footer/Footer";

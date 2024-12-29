@@ -1,6 +1,7 @@
 import CanvasSection from "./components/CanvasSection";
+import Header from "../../components/recycleComponent/Header/Header";
 
-const Test = () => {
+const CanvasPage = () => {
   return (
     <div >
       <CanvasSection  />
@@ -8,4 +9,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default CanvasPage ;

@@ -2,6 +2,8 @@ import SingupComponent from "@/pages/Signup/component/SingupComponent.tsx";
 import {useState} from "react";
 import axios from "axios";
 import API from "@/api";
+import Header from "@/components/recycleComponent/Header/Header";
+import Footer from "@/components/recycleComponent/Footer/Footer"
 
 interface FormData {
     username: string;
@@ -71,7 +73,9 @@ const SignupPage = () => {
 
     return (
         <div>
+            <Header/>
             <SingupComponent errormsg = {error} success = {success} onClickSubmit={handleSubmit} />
+            <Footer/>
         </div>
     )
 

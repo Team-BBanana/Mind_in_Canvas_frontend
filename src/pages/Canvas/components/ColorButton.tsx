@@ -22,7 +22,7 @@ interface ColorButtonProps {
 const ColorButton = ({ color, penColor, setPenColor }: ColorButtonProps) => (
     <button
         className={`w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform`}
-        style={{ backgroundColor: COLOR_CODE[color] , border : "10px" , borderRadius : "50%", width: "30px" , height: "30px", margin : "3px"}}
+        style={{ backgroundColor: COLOR_CODE[color] , border : "10px" , borderRadius : "50%", width: "40px" , height: "40px", margin : "3px"}}
         onClick={() => setPenColor(color)}
     >
         {penColor === color && <CheckIcon className="w-4 h-4 text-white" />}

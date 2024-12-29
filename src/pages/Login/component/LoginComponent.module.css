@@ -2,7 +2,6 @@
 input {
     margin: 10px 0;
     padding: 12px;
-    width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
@@ -15,7 +14,7 @@ input {
     justify-content: flex-end;
     align-items: center;
     margin: 10px 0;
-    width: auto;
+    width: 105%;
 }
 
 input[type="checkbox"] {
@@ -44,13 +43,13 @@ input[type="checkbox"] {
     border-radius: 50px;
     cursor: pointer;
     width: 100%;
-    font-size: 18px;
 }
 
 .signupContainer{
     width: 105%;
     display: flex;
     justify-content:space-between; 
+    margin-top: 3%;
 }
 
 .MindinCanvasImage {
@@ -58,18 +57,12 @@ input[type="checkbox"] {
     font-size: 18px;
 }
 
-.signupLink {
-    font-size: 25px;
-}
-
-
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center; /* 수직 중앙 정렬 */
     align-items: center; /* 수평 중앙 정렬 */
-    margin-top: 0; /* 여백 제거 */
-    height: 100vh; /* 전체 화면 높이 사용 */
+    height: 95vh; /* 전체 화면 높이 사용 */
 }
 
 .footer {
@@ -98,10 +91,7 @@ input[type="checkbox"] {
     .content {
         flex-direction: column; /* 세로 방향 정렬 */
     }
-
-    .container {
-    }
-
+    
     .loginContainer {
         margin-right: 30px;
         
