@@ -22,8 +22,6 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
     const passwordRef = useRef<HTMLInputElement>(null);
     const password_confirmRef = useRef<HTMLInputElement>(null);
 
-
-
     const [formData, setFormData] = useState<FormData>({
         username: '',
         email: '',
@@ -47,59 +45,61 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
     };
 
     return (
-        <div className={style.signupContainer}>
-            <h2>회원 가입</h2>
+        <div className= {style.container}>
+            <div className = {style.content}>
+                <div>
+                    <form onSubmit={handleSubmit} className={style.formContainer}>
+                        <Input
+                            type="name"
+                            id="username"
+                            name="username"
+                            placeholder="부모님 이름"
+                            value={formData.username}
+                            onChange={handleChange}
+                            ref={usernameRef}
+                            required
+                        />
+                        <Input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="이메일"
+                            value={formData.email}
+                            onChange={handleChange}
+                            ref={emailRef}
+                            required
+                        />
+                        <Input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="비밀번호"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                        <Input
+                            type="password"
+                            id="password_confirm"
+                            name="password_confirm"
+                            placeholder="6자리 핀"
+                            value={formData.password_confirm}
+                            onChange={handleChange}
+                            ref={password_confirmRef}
+                            required
+                        />
 
-            <form onSubmit={handleSubmit} className={style.formContainer}>
-                <Input
-                    type="name"
-                    id="username"
-                    name="username"
-                    label="아이이름"
-                    value={formData.username}
-                    onChange={handleChange}
-                    ref={usernameRef}
-                    required
-                />
 
-                <Input
-                    type="email"
-                    id="email"
-                    name="email"
-                    label="이메일"
-                    value={formData.email}
-                    onChange={handleChange}
-                    ref={emailRef}
-                    required
-                />
-                <Input
-                    type="password"
-                    id="password"
-                    name="password"
-                    label="비밀번호"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-                <Input
-                    type="password"
-                    id="password_confirm"
-                    name="password_confirm"
-                    label="6자리 핀"
-                    value={formData.password_confirm}
-                    onChange={handleChange}
-                    ref={password_confirmRef}
-                    required
-                />
-
-
-                {errormsg && <p className="error" style={{ whiteSpace: 'pre-wrap' }}>{errormsg}</p>}
-                {success && <p className="success">{success}</p>}
-                <div className={style.buttonContainer}>
-                    <Button type="submit">회원가입</Button>
+                        {errormsg && <p className="error" style={{ whiteSpace: 'pre-wrap' }}>{errormsg}</p>}
+                        {success && <p className="success">{success}</p>}
+                        <div className={style.buttonContainer}>
+                            <Button type="submit">회원가입</Button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
+
     );
 };
 
