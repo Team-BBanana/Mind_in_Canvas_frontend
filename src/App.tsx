@@ -8,12 +8,12 @@ import MainPage from "@/pages/Main/MainPage.tsx";
 function App() {
     return (
             <BrowserRouter>
-                <div style={{ top: '-6px', left: '-6px', position: 'relative' }}>
+                <div >
                     <Routes>
-                        <Route path="/" element={<MainPage  />} />
-                        <Route path="/canvas" element={<CanvasPage />} />
-                        <Route path="/login" element={<LoginPage  />} />
-                        <Route path="/signup" element={<SignupPage  />} />
+                        <Route path="/" element={<MainPage/>} />
+                        <Route path="/canvas" element={<CanvasPage/>} />
+                        <Route path="/login" element={<LoginPage/>} />
+                        <Route path="/signup" element={<SignupPage/>} />
                     </Routes>
                 </div>
             </BrowserRouter>

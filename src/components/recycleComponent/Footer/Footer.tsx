@@ -1,8 +1,8 @@
-import './Footer.module.css';
+import style from './Footer.module.css';
 
 const Footer = () => {
     return (
-        <footer className="footer">
+        <footer className={style.footer}>
             <p>© 2025 Krafton Jungle 7th team BBANANA. all rights reserved</p>
         </footer>
     );

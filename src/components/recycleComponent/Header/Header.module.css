@@ -4,8 +4,32 @@
     text-align: left;
     font-family: 'Moirai One';
     font-size: large;
-    padding-left: 100px;
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
+}
+
+.logo {
+    width: 200%;
+}
+
+
+@media screen and (max-width: 900px) { /* 가로 폭이 768px 이하일 때 */
+    .header {
+        background-color: #feb913;
+        color: 	#424242;
+        text-align: left;
+        font-family: 'Moirai One';
+        font-size: large;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 230%;
+    }
+    
+    .logo {
+        width: 200%;
+    }
+
 }
