@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import './styles.css';
-import Header from '../../components/recycleComponent/Header/Header';
-import Footer from '../../components/recycleComponent/Footer/Footer';
+import { useState } from 'react';
 import LoginComponent from './component/LoginComponent';
 
 interface FormData {
@@ -9,11 +6,6 @@ interface FormData {
     password: string;
 }
 
-const Logo = () => (
-    <div className="logo">
-        <img src="/src/assets/imgs/mindincanvas_logo.png" alt="로고" />
-    </div>
-);
 
 const LoginPage = () => {
     const [error, setError] = useState<string | null>(null);
@@ -27,17 +19,10 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="container">
-            <Header />
-            <div className="content">
-                <Logo />
-                <div className="login-box">
-                    <img src="src/assets/imgs/textLogo.png" alt="그림로고" />
-                    <LoginComponent onClickSubmit={handleSubmit} errormsg={error} success={success} />
-                </div>
-            </div>
-            <Footer />
+        <div>
+            <LoginComponent onClickSubmit={handleSubmit} errormsg={error} success={success} />
         </div>
+
     );
 };
 
