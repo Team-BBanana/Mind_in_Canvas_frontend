@@ -1,35 +1,41 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from "@/components/recycleComponent/Button/Button.tsx";
 import Toolbar from "@/pages/Canvas/components/Toolbar.tsx";
 
-const BannerSection = () => {
+interface BannerSectionProps {
+    onSave: () => void;
+}
+
+const BannerSection: React.FC<BannerSectionProps> = ({ onSave }) => {
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        navigate('/'); // Navigate to the root path
+    };
 
     return (
         <div
             style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between", // 좌우 끝에 요소 배치
-                width: "100%", // 전체 화면 크기 기준으로 정렬
+                justifyContent: "space-between",
+                width: "100%",
             }}
         >
-            {/* 맨 왼쪽 버튼 */}
-            <Button type="submit" style={{ marginLeft: "10px" }}>
+            <Button type="button" style={{ marginLeft: "10px" }} onClick={handleBack}>
                 뒤로
             </Button>
 
-            {/* 가운데 툴바 */}
             <div style={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
                 <Toolbar />
             </div>
 
-            {/* 맨 오른쪽 버튼 */}
-            <Button type="submit" style={{ marginRight: "10px" }}>
+            <Button type="button" style={{ marginRight: "10px" }} onClick={onSave}>
                 저장
             </Button>
         </div>
     );
+};
 
-
-}
-
-export default BannerSection
+export default BannerSection;

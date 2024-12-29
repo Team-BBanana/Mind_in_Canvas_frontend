@@ -1,0 +1,35 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
+}
+
+.backgroundImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.characterImage {
+    position: absolute;
+    width: 300px; /* Adjust size as needed */
+    height: 300px; /* Adjust size as needed */
+    z-index: 2;
+    cursor: move; /* Indicate that the image can be moved */
+}
+
+.title {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    z-index: 3;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+} 
