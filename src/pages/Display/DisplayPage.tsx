@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { cardData } from '../Main/component/cardData';
 import DisplayComponent from './component/DisplayComponent';
+import style from './DisplayPage.module.css';
+import Footer from '@/components/recycleComponent/Footer/Footer';
 
 const DisplayPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -13,7 +15,13 @@ const DisplayPage: React.FC = () => {
     }
 
     return (
-        <DisplayComponent title={card.title} imageUrl={card.imageUrl} />
+        <div className={style.container}>
+            <h1 className={style.title}>{card.title}</h1>
+            <div className={style.content}>
+                <DisplayComponent title={card.title} imageUrl={card.imageUrl} />
+            </div>
+            <Footer />
+        </div>
     );
 };
 

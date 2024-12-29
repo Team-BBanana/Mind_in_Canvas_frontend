@@ -56,7 +56,6 @@ const LoginComponent: React.FC<LoginProps> = ({ errormsg, success, onClickSubmit
     // };
 
     return (
-        <div>
         <div className={style.container}>
             <div className={style.content}>
                 <img src={Mind_in_canvas} className={style.MindinCanvasImage} alt="Mind in Canvas" />
@@ -124,7 +123,6 @@ const LoginComponent: React.FC<LoginProps> = ({ errormsg, success, onClickSubmit
                     </div>
                 </div>
             </div>
-        </div>
         <Footer/>
         </div>
     );

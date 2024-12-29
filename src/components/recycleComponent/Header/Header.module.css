@@ -9,32 +9,32 @@
     top: 0;
     left: 0;
     width: 100%;
-<<<<<<< HEAD
     height: 100px;
     box-sizing: border-box;
-=======
-    box-sizing: border-box; /* Include padding in width calculations */
->>>>>>> bd90ce6c094db5a9e008dd7d4fa6008c843e59ff
 }
 
 .logo {
-    width: 10%; /* Adjusted to a more reasonable size */
-    max-width: 100px; /* Ensure it doesn't grow too large */
+    width: 100%; /* Adjusted to a more reasonable size */
+    max-width: 200px; /* Ensure it doesn't grow too large */
 }
 
 .logoutButton {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    background-color: transparent;
+    color: #424242;
+    border: 2px solid #424242;
+    padding: 8px 16px;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    white-space: nowrap; /* Prevent text from wrapping */
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .logoutButton:hover {
-    background-color: #ff1a1a;
+    background-color: #f6821f;
 }
 
 @media screen and (max-width: 900px) {

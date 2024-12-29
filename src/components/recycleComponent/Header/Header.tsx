@@ -1,5 +1,5 @@
 import style from './Header.module.css';
-import Logo from '@/assets/imgs/textLogo-removebg-preview.png';
+import Logo from '@/assets/imgs/textLogo-removebg-preview.svg';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -23,10 +23,7 @@ const Header = () => {
 
     return (
         <header className={style.header}>
-<<<<<<< HEAD
-             {/* <img src={Logo} alt="text logo" width="10%"  /> */}
-=======
-            <img 
+            <img className={style.logo}
                 src={Logo} 
                 alt="text logo" 
                 width="10%" 
@@ -36,7 +33,6 @@ const Header = () => {
             <button className={style.logoutButton} onClick={handleLogout}>
                 Logout
             </button>
->>>>>>> bd90ce6c094db5a9e008dd7d4fa6008c843e59ff
         </header>
     );
 };
