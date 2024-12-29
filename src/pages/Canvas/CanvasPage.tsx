@@ -1,6 +1,7 @@
 import CanvasSection from "./components/CanvasSection";
 
 const CanvasPage = () => {
+  
   const uploadCanvasImage = (dataURL: string) => {
     const blob = dataURLToBlob(dataURL);
 
@@ -39,4 +40,4 @@ const CanvasPage = () => {
   );
 };
 
-export default CanvasPage;
+export default CanvasPage ;

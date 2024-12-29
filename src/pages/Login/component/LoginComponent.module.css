@@ -1,8 +1,7 @@
-
 input {
+    width: 100%;
     margin: 10px 0;
     padding: 12px;
-    width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
@@ -15,7 +14,7 @@ input {
     justify-content: flex-end;
     align-items: center;
     margin: 10px 0;
-    width: auto;
+    width: 105%;
 }
 
 input[type="checkbox"] {
@@ -44,13 +43,17 @@ input[type="checkbox"] {
     border-radius: 50px;
     cursor: pointer;
     width: 100%;
-    font-size: 18px;
 }
 
 .signupContainer{
     width: 105%;
     display: flex;
     justify-content:space-between; 
+    margin-top: 3%;
+}
+
+.signupContainer a {
+    margin-right: 20px;
 }
 
 .MindinCanvasImage {
@@ -58,18 +61,13 @@ input[type="checkbox"] {
     font-size: 18px;
 }
 
-.signupLink {
-    font-size: 25px;
-}
-
-
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* 수직 중앙 정렬 */
-    align-items: center; /* 수평 중앙 정렬 */
-    margin-top: 0; /* 여백 제거 */
-    height: 100vh; /* 전체 화면 높이 사용 */
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    position: relative;
 }
 
 .footer {
@@ -81,13 +79,16 @@ input[type="checkbox"] {
     bottom: 0;
     width: 100%;
 }
+
 .content {
     display: flex;
     justify-content: center;
     flex-direction: row; /* 요소를 가로로 배치 */
     align-items: center;
-    gap: 100px; /* 각 요소 사이의 간격을 100px로 설정 */
+    gap: 50px;
+    max-height: 100vh; /* 뷰포트 높이를 넘지 않도록 제한 */
 }
+
 .TextLogoImage {
     width: 100%;
     height: 50%;
@@ -98,10 +99,7 @@ input[type="checkbox"] {
     .content {
         flex-direction: column; /* 세로 방향 정렬 */
     }
-
-    .container {
-    }
-
+    
     .loginContainer {
         margin-right: 30px;
         
@@ -121,6 +119,8 @@ input[type="checkbox"] {
 .loginbox {
     max-width: 500px;
     width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -155,11 +155,6 @@ input[type="checkbox"] {
     width: 100%;
 }
 
-.link-container {
-    display: flex;
-    margin-left: auto;
-}
-
 .links a {
     margin-left: 20px;
     text-decoration: none;
@@ -183,13 +178,4 @@ input[type="checkbox"] {
     position: sticky;
     width: 160px;
     align-content: left;
-}
-
-.placeholder-font text {
-    font-family: 'Noto Sans kr';
-}
-
-.options {
-    display: flex;
-    gap: 20px;
 }

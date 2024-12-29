@@ -29,6 +29,18 @@ const CanvasSection: React.FC<CanvasSectionProps> = ({ onUpload }) => {
     newCanvas.isDrawingMode = true;
     newCanvas.renderAll();
 
+    // 휠을 이용해서 줌인/줌아웃
+    // newCanvas.on("mouse:wheel", (opt) => {
+    //   const delta = opt.e.deltaY;
+    //   let zoom = newCanvas.getZoom();
+    //   zoom *= 0.999 ** delta;
+    //   if (zoom > 20) zoom = 20;
+    //   if (zoom < 0.01) zoom = 0.01;
+    //   newCanvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+    //   opt.e.preventDefault();
+    //   opt.e.stopPropagation();
+    // });
+
     const handleResize = () => {
       newCanvas.setWidth(window.innerWidth);
       newCanvas.setHeight(window.innerHeight);

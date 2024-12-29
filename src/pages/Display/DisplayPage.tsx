@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import DisplayComponent from './component/DisplayComponent';
+import style from './DisplayPage.module.css';
+import Footer from '@/components/recycleComponent/Footer/Footer';
 
 interface ImageData {
     backgroundImageUrl: string;

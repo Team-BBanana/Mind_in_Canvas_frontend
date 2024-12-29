@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import LoginComponent from './component/LoginComponent';
 
 interface FormData {
@@ -19,10 +19,9 @@ const LoginPage = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <LoginComponent onClickSubmit={handleSubmit} errormsg={error} success={success} />
         </div>
-
     );
 };
 

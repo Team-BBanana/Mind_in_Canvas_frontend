@@ -6,6 +6,7 @@ import LoginPage from "@/pages/Login/LoginPage.tsx";
 import SignupPage from "@/pages/Signup/SignupPage.tsx";
 import MainPage from "@/pages/Main/MainPage.tsx";
 import Header from './components/recycleComponent/Header/Header.tsx'; // Header import
+import Footer from './components/recycleComponent/Footer/Footer.tsx'; // Footer import
 import { useLocation } from 'react-router-dom'; // useLocation import
 import SelectKidsPage from './pages/SelectKids/SelectKidsPage.tsx';
 import DisplayPage from './pages/Display/DisplayPage.tsx';
@@ -36,6 +37,7 @@ function App() {
                     </Routes>
                 </div>
             )}
+            <Footer />
         </div>
     ); 
 }

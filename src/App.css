@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Moirai+One&family=Noto+Sans+KR:wght@100..900&display=swap');
 
- #root {
+#root {
     background: white;
     font-family: "Noto Sans KR", serif;
     color:  #424242;
 }
 
+body {
+    margin: 0px;
+}
+
 .main-content {
-    margin-top: 60px;
-    padding: 20px;
+    padding-top: 100px; /* 헤더 높이만큼 여백 추가 */
+    padding-bottom: 60px; /* Footer 높이만큼 여백 추가 */
 }

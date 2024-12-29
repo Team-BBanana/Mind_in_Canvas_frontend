@@ -1,5 +1,5 @@
 import style from './Header.module.css';
-import Logo from '@/assets/imgs/textLogo-removebg-preview.png';
+import Logo from '@/assets/imgs/textLogo-removebg-preview.svg';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -23,7 +23,7 @@ const Header = () => {
 
     return (
         <header className={style.header}>
-            <img 
+            <img className={style.logo}
                 src={Logo} 
                 alt="text logo" 
                 width="10%" 
