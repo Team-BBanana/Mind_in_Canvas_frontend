@@ -1,11 +1,14 @@
-import './Header.module.css';
+import style from'./Header.module.css';
+import Logo from '@/assets/imgs/textLogo-removebg-preview.png';
 
 const Header = () => {
+
     return (
-        <header className="header">
-            <h1>그림속마음</h1>
+        <header className={style.header}>
+             <img src={Logo} alt="text logo" width="10%"  />
         </header>
     );
+    
 };
 
 export default Header;
