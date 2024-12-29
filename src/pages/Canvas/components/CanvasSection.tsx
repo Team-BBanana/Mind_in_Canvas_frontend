@@ -5,7 +5,11 @@ import { useAtom } from "jotai";
 import canvasInstanceAtom from "./stateCanvasInstance";
 import BannerSection from "@/pages/Canvas/components/BannerSection.tsx";
 
-const CanvasSection = () => {
+interface CanvasSectionProps {
+  onUpload: (dataURL: string) => void;
+}
+
+const CanvasSection: React.FC<CanvasSectionProps> = ({ onUpload }) => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const [canvas, setCanvas] = useAtom(canvasInstanceAtom);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,12 +20,11 @@ const CanvasSection = () => {
     const newCanvas = new fabric.Canvas(canvasRef.current, {
       width: window.outerWidth,
       height: window.outerHeight,
-      backgroundColor: "white"
+      backgroundColor: "transparent"
     });
 
     setCanvas(newCanvas);
 
-    // 초기 설정
     newCanvas.freeDrawingBrush.width = 10;
     newCanvas.isDrawingMode = true;
     newCanvas.renderAll();
@@ -38,58 +41,32 @@ const CanvasSection = () => {
     //   opt.e.stopPropagation();
     // });
 
-    // 화면 크기 변경 시 동적으로 캔버스 크기 조정
     const handleResize = () => {
       newCanvas.setWidth(window.innerWidth);
       newCanvas.setHeight(window.innerHeight);
-      newCanvas.renderAll(); // 크기 변경 후 다시 렌더링
+      newCanvas.renderAll();
     };
 
     window.addEventListener("resize", handleResize);
 
-    // 윈도우 리사이즈 이벤트 감지
-    // const handleResize = () => {
-    //   newCanvas.setDimensions({
-    //     width: canvasContainer.offsetWidth,
-    //     height: canvasContainer.offsetHeight
-    //   });
-    // };
-    // window.addEventListener("resize", handleResize);
-
-    // 처음 접속했을 때 캔버스에 그리기 가능하도록 설정
-    newCanvas.freeDrawingBrush.width = 10;
-    newCanvas.isDrawingMode = true;
-
-    // 언마운트 시 캔버스 정리, 이벤트 제거
     return () => {
       newCanvas.dispose();
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  useEffect(() => {
-    // delete 키를 이용해서 선택된 객체 삭제
-    const handleDelete = ({ key, code }: { key: string; code: string }) => {
-      if (!canvas) return;
-      if (!(code === "Delete" || key === "Delete" || code === "Backspace" || key === "Backspace")) return;
-      const activeObjects = canvas!.getActiveObjects();
-      if (activeObjects && activeObjects.length > 0) {
-        // 선택된 모든 객체 삭제
-        activeObjects.forEach((obj) => {
-          canvas!.remove(obj);
-        });
-        canvas!.discardActiveObject(); // 선택 해제
-      }
-    };
-
-    return () => {
-      window.removeEventListener("keyup", handleDelete);
-    };
-  }, [canvas]);
+  const saveCanvasAsImage = () => {
+    if (!canvas) return;
+    const dataURL = canvas.toDataURL({
+      format: 'png',
+      quality: 1.0
+    });
+    onUpload(dataURL);
+  };
 
   return (
-    <div ref={canvasContainerRef} className="canvas-section">
-      <BannerSection />
+    <div ref={canvasContainerRef}>
+      <BannerSection onSave={saveCanvasAsImage} />
       <canvas ref={canvasRef} />
     </div>
   );
