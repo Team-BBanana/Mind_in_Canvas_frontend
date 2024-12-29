@@ -52,6 +52,10 @@ input[type="checkbox"] {
     margin-top: 3%;
 }
 
+.signupContainer a {
+    margin-right: 20px;
+}
+
 .MindinCanvasImage {
     width: 100%;
     font-size: 18px;
