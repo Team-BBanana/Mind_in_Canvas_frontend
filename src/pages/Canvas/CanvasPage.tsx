@@ -12,9 +12,9 @@ const CanvasPage = () => {
       method: 'POST',
       body: formData,
     })
-      .then(response => response.text())
+      .then(response => response.json())
       .then(data => {
-        console.log(data);
+        console.log('File uploaded successfully:', data.url);
       })
       .catch(error => {
         console.error('Error uploading file:', error);
@@ -40,4 +40,4 @@ const CanvasPage = () => {
   );
 };
 
-export default CanvasPage ;
+export default CanvasPage;

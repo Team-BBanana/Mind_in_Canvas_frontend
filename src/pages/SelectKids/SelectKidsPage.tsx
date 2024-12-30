@@ -1,12 +1,10 @@
-import SelectKidsComponent from "./component/SelectKidsComponent";
-import { kidsData } from "./kidsData";
+import SelectKidComponent from './component/SelectKidsComponent';
 
 const SelectKidsPage = () => {
     return (
         <div>
-            <SelectKidsComponent kids={kidsData} />
+            <SelectKidComponent/>
         </div>
     );
 };
-
 export default SelectKidsPage;
