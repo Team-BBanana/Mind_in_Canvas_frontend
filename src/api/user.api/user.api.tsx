@@ -3,8 +3,8 @@ import { CanvasClient } from ".."
 // 타입 정의
 interface UserData {
     name?: string;
-    email: string;
-    password: string;
+    email?: string;
+    password?: string;
     role?: string;
     socialProvider?: string;
     phoneNumber?: string;
@@ -33,9 +33,12 @@ export async function loginUser(data: { email: string; password: string }): Prom
 }
 
 // 로그아웃
-export async function logoutUser(data: UserData): Promise<any> {
-    const url = `/user/auth/`;
-    return await CanvasClient.delete(url, { data });
+export async function logoutUser(): Promise<any> {
+    const response = await CanvasClient.post('/auth/logout', null, {
+        withCredentials: true,
+    });
+
+    return response;
 }
 
 // 토큰 갱신
@@ -58,7 +61,7 @@ export async function restoreAccount(data: UserData): Promise<any> {
 
 // 회원 가입
 export async function signupUser(data: UserData): Promise<any> {
-    const url = `/users/register`;
+    const url = `/users/signup`;
 
     const requestData = {
         name: data.name,

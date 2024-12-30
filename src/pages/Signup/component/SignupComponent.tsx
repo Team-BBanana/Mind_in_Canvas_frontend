@@ -4,7 +4,7 @@ import style from "./SignupComponent.module.css";
 import Button from "@/components/recycleComponent/Button/Button.tsx";
 
 interface FormData {
-    username: string;
+    name: string;
     email: string;
     password: string;
     password_confirm: string;
@@ -23,7 +23,7 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
     const password_confirmRef = useRef<HTMLInputElement>(null);
 
     const [formData, setFormData] = useState<FormData>({
-        username: '',
+        name: '',
         email: '',
         password: '',
         password_confirm: ''
@@ -36,12 +36,12 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        const username = usernameRef.current?.value || "";
+        const name = usernameRef.current?.value || "";
         const email = emailRef.current?.value || "";
         const password = passwordRef.current?.value || "";
         const password_confirm = password_confirmRef.current?.value || "";
 
-        onClickSubmit({ username, email, password, password_confirm });
+        onClickSubmit({ name, email, password, password_confirm });
     };
 
     return (
@@ -51,10 +51,10 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
                     <h1>회원가입</h1>
                     <Input
                         type="text"
-                        id="username"
-                        name="username"
+                        id="name"
+                        name="name"
                         placeholder="부모님 이름"
-                        value={formData.username}
+                        value={formData.name}
                         onChange={handleChange}
                         ref={usernameRef}
                         required

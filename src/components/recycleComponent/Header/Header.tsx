@@ -1,23 +1,27 @@
 import style from './Header.module.css';
 import Logo from '@/assets/imgs/textLogo-removebg-preview.svg';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '@/api';
 
 const Header = () => {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/auth/logout', {}, {
-                withCredentials: true,
-            });
+            const response = await API.userApi.logoutUser();
+            console.log(response.data);
             if (response.status === 200) {
                 navigate('/login');
             } else {
                 console.error('Logout failed');
             }
         } catch (error) {
-            console.error('Error during logout:', error);
+            if (error.response && error.response.status === 401) {
+                console.error('Unauthorized: Redirecting to login');
+                navigate('/login');
+            } else {
+                console.error('Error during logout:', error);
+            }
         }
     };
 

@@ -6,10 +6,12 @@ import Header from "@/components/recycleComponent/Header/Header";
 import Footer from "@/components/recycleComponent/Footer/Footer"
 
 interface FormData {
-    username: string;
+    name: string;
     email: string;
     password: string;
-    password_confirm: string;
+    role: string;
+    socialProvider: string;
+    phoneNumber: string;
 }
 
 
@@ -20,15 +22,10 @@ const SignupPage = () => {
 
 
     const handleSubmit = async (formData : FormData) => {
-
-        if (formData.password !== formData.password_confirm) {
-            setError('Passwords do not match');
-            return;
-        }
-
+        console.log(formData);
         try {
             const result = await API.userApi.signupUser({
-                name: formData.username,
+                name: formData.name,
                 email: formData.email,
                 password: formData.password,
                 role : "ROLE_USER",
@@ -47,20 +44,14 @@ const SignupPage = () => {
                 const data = err.response.data.errors;
                 const errors: string[] = [];
 
-                if (data.username) {
-                    errors.push(data.username);
-                }
-                if (data.nickname) {
-                    errors.push(data.nickname);
+                if (data.name) {
+                    errors.push(data.name);
                 }
                 if (data.email) {
                     errors.push(data.email);
                 }
                 if (data.password) {
                     errors.push(data.password);
-                }
-                if (data.occupation) {
-                    errors.push(data.occupation);
                 }
 
                 setError(errors.join('\n'));
