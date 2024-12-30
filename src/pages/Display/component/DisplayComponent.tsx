@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import style from './DisplayComponent.module.css';
+import Button from '@/components/recycleComponent/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 interface DisplayComponentProps {
     title: string;
@@ -14,13 +16,25 @@ interface Position {
 }
 
 const DisplayComponent: React.FC<DisplayComponentProps> = ({ title, backgroundImageUrl, characterImages }) => {
-    const [positions, setPositions] = useState<Position[]>(characterImages.map(() => ({ x: 0, y: 0 })));
+    const navigate = useNavigate();
+    const [positions, setPositions] = useState<Position[]>(() => {
+        const savedPositions = localStorage.getItem('characterPositions');
+        return savedPositions ? JSON.parse(savedPositions) : characterImages.map(() => ({ x: 0, y: 0 }));
+    });
 
     const handleDrag = (index: number, e: DraggableEvent, data: DraggableData) => {
         const newPositions = [...positions];
         newPositions[index] = { x: data.x, y: data.y };
         setPositions(newPositions);
-        // Optionally, save the new position to a database or local storage here
+        localStorage.setItem('characterPositions', JSON.stringify(newPositions));
+    };
+
+    const handleBack = () => {
+        navigate('/');
+    };
+
+    const handleContinue = () => {
+        navigate('/canvas', { state: { backgroundImageUrl } });
     };
 
     return (
@@ -36,6 +50,10 @@ const DisplayComponent: React.FC<DisplayComponentProps> = ({ title, backgroundIm
                 </Draggable>
             ))}
             <h1 className={style.title}>{title}</h1>
+                <div className={style.buttonContainer}>
+                    <Button type="button" onClick={handleBack}>뒤로가기</Button>
+                    <Button type="button" onClick={handleContinue}>이어그리기</Button>
+                </div>
         </div>
     );
 };

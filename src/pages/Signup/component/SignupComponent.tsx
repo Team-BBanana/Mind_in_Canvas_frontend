@@ -50,7 +50,7 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
                 <form onSubmit={handleSubmit} className={style.formContainer}>
                     <h1>회원가입</h1>
                     <Input
-                        type="name"
+                        type="text"
                         id="username"
                         name="username"
                         placeholder="부모님 이름"
@@ -76,20 +76,21 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
                         placeholder="비밀번호"
                         value={formData.password}
                         onChange={handleChange}
+                        ref={passwordRef}
                         required
                     />
                     <Input
                         type="password"
                         id="password_confirm"
                         name="password_confirm"
-                        placeholder="6자리 핀"
+                        placeholder="비밀번호 확인"
                         value={formData.password_confirm}
                         onChange={handleChange}
                         ref={password_confirmRef}
                         required
                     />
 
-                    {errormsg && <p className="error" style={{ whiteSpace: 'pre-wrap' }}>{errormsg}</p>}
+                    {errormsg && <p className="error">{errormsg}</p>}
                     {success && <p className="success">{success}</p>}
                     <div className={style.buttonContainer}>
                         <Button type="submit">회원가입</Button>
