@@ -12,8 +12,8 @@ body {
 }
 
 .main-content {
-    display: flex; /* Flexbox 사용 */
-    min-height: calc(100vh - 160px); /* 전체 높이에서 패딩 값을 뺀 높이 */
+    display: flex;
     align-items: center;
     justify-content: center;
+    /* width: 100%; */
 }

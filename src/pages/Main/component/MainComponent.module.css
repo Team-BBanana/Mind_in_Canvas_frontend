@@ -1,5 +1,7 @@
 .container {
-    padding: 20px 100px;
+    align-items: center;
+    justify-content: center;
+    width: 100%
 }
 
 .cardGrid {
