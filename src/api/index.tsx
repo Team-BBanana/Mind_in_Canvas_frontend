@@ -1,5 +1,6 @@
 import axios from "axios";
 import userApi from "@/api/user.api";
+import kidApi from '@/api/kid.api';
 
 
 
@@ -9,6 +10,9 @@ export const CanvasClient = axios.create({
 })
 
 
-const API = {userApi};
+const API = {
+    userApi,
+    kidApi,
+};
 
 export default API;

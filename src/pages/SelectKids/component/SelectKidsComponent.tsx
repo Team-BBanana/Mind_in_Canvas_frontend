@@ -13,7 +13,7 @@ const SelectKidComponent = () => {
             <h1 className={style.title}>✨그림을 그릴 아이를 선택해주세요✨</h1>
             <div className={style.accountlist}>
                 {accounts.map(account => (
-                    <div 
+                    <div
                         key={account.id} 
                         className={style.accountItem}
                         onClick={() => handleSelectKid(account.id, account.name)}

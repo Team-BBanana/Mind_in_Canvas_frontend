@@ -4,6 +4,7 @@ import axios from "axios";
 import API from "@/api";
 import Header from "@/components/recycleComponent/Header/Header";
 import Footer from "@/components/recycleComponent/Footer/Footer"
+import { useNavigate } from "react-router-dom";
 
 interface FormData {
     name: string;
@@ -19,6 +20,7 @@ const SignupPage = () => {
 
     const [error, setError] = useState<string| null>(null);
     const [success, setSuccess] = useState<string | null>(null);
+    const navigate = useNavigate();
 
 
     const handleSubmit = async (formData : FormData) => {
@@ -33,8 +35,9 @@ const SignupPage = () => {
                 phoneNumber: "010-5096-6584"
             });
             if ( result.status == 201){
-                setSuccess('Signup successful!');
+                setSuccess('회원가입이 완료되었습니다!');
                 setError(null);
+                navigate('/signup/kids');
             }
             setError(result.data.body);
 

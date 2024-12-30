@@ -44,6 +44,18 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
         onClickSubmit({ name, email, password, password_confirm });
     };
 
+    const handleSubmitClick = () => {
+        const formData: FormData = {
+            name: "이름",
+            email: "이메일",
+            password: "비밀번호",
+            role: "ROLE_USER",
+            socialProvider: "GOOGLE",
+            phoneNumber: "010-1234-5678"
+        };
+        onClickSubmit(formData);
+    };
+
     return (
         <div className={style.container}>
             <div className={style.content}>
