@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LoginComponent from './component/LoginComponent';
 
 interface FormData {
