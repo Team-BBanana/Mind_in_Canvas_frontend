@@ -9,6 +9,7 @@ const MainComponent: React.FC = () => {
 
     return (
         <div className={style.container}>
+            <h1 className={style.title}>✨ 내 그림 모아보기 ✨</h1>
             <div className={style.cardGrid}>
                 {cardData.map((card, index) => (
                     <CardComponent
