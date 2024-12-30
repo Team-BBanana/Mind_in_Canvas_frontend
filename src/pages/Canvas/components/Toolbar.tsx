@@ -14,6 +14,8 @@ import activeToolAtom from "./stateActiveTool";
 import canvasInstanceAtom from "./stateCanvasInstance";
 import { useAtom, useAtomValue } from "jotai";
 
+import style from "../CanvasPage.module.css"
+
 const Toolbar = () => {
   const [activeTool, setActiveTool] = useAtom(activeToolAtom);
   const canvas = useAtomValue(canvasInstanceAtom);
@@ -140,6 +142,7 @@ const Toolbar = () => {
         <div className="absolute top-2.5 left-2.5  z-10 bg-white p-2 rounded shadow-lg">
           {/*<div className="flex flex-col items-center justify-center p-2 w-12 gap-1 rounded-xl bg-grayscale-lightgray border border-grayscale-lightgray shadow-md ">*/}
           <div style={ { display: "flex", justifyContent: "space-between", alignItems: "center" , gap : "8px"}}>
+            <div className={style.toolButton}>
             <ToolButton
                 icon={PenIcon}
                 onClick={() => {
@@ -173,7 +176,8 @@ const Toolbar = () => {
                 disabled={activeTool === "hand"}
                 title="Hand Tool"
             />
-            <ColorPanel className={`${activeTool === "pen" ? "block" : "hidden"}`}/>
+            </div>
+
           </div>
         </div>
   );

@@ -52,7 +52,7 @@ const DisplayComponent: React.FC<DisplayComponentProps> = ({ title, backgroundIm
             <h1 className={style.title}>{title}</h1>
                 <div className={style.buttonContainer}>
                     <Button type="button" onClick={handleBack}>뒤로가기</Button>
-                    <Button type="button" onClick={handleContinue}>이어그리기</Button>
+                    <Button type="button" onClick={handleContinue}>친구만들기</Button>
                 </div>
         </div>
     );

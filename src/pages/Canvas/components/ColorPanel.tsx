@@ -1,4 +1,3 @@
-
 import { fabric } from "fabric";
 import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai";
@@ -22,13 +21,14 @@ const ColorPanel: React.FC<ColorPanelProps> = ({ className }) => {
 
   return (
       <div className="fixed bottom-0 left-0 w-full flex justify-center items-center p-4 z-50">
-        <div className={`${className} bg-white rounded-full shadow-lg p-3 flex gap-2`}>
+        <div className={`${className} bg-white rounded shadow-lg p-3 flex flex-col gap-2`}>
           {COLORS.map((color) => (
               <ColorButton
                   key={color}
                   color={color}
                   penColor={penColor}
                   setPenColor={setPenColor}
+                  style={{ width: '100%', display: 'block' }}
               />
           ))}
         </div>
