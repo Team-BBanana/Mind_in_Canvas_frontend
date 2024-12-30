@@ -2,12 +2,12 @@ import { CanvasClient } from ".."
 
 // 타입 정의
 interface UserData {
-    name: string;
+    name?: string;
     email: string;
     password: string;
-    role: string;
-    socialProvider: string;
-    phoneNumber: string;
+    role?: string;
+    socialProvider?: string;
+    phoneNumber?: string;
 }
 
 export async function getUserInfo(): Promise<any> {
@@ -16,9 +16,20 @@ export async function getUserInfo(): Promise<any> {
 }
 
 // 로그인
-export async function loginUser(data: UserData): Promise<any> {
-    const url = `/user/auth/`;
-    return await CanvasClient.post(url, data);
+export async function loginUser(data: { email: string; password: string }): Promise<any> {
+    const formDataToSend = new FormData();
+    formDataToSend.append('username', data.email);
+    formDataToSend.append('password', data.password);
+
+    const response = await CanvasClient.post('/auth/login', formDataToSend, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+        maxRedirects: 0,
+        withCredentials: true // 인증 정보 포함 (쿠키)
+    });
+
+    return response;
 }
 
 // 로그아웃

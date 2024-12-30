@@ -1,25 +1,36 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LoginComponent from './component/LoginComponent';
+import API from '@/api/index';
 
 interface FormData {
     email: string;
     password: string;
 }
 
-
 const LoginPage = () => {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
-    //에러뜨는건 사용이 안되서 뜨는거라 일단 그냥 두면됩니다. 실행되는데 문제 x formData도 마찬가지
+    const navigate = useNavigate();
 
     const handleSubmit = async (formData: FormData) => {
-        console.log(formData);
-        // 로그인 처리 로직 추가
-        // 성공 또는 실패에 따라 setError 또는 setSuccess 호출
+        try {
+            const response = await API.userApi.loginUser(formData);
+            console.log("aaaaaaaaaaaaaaaa" + response);
+            if (response.status === 302) {
+                navigate('/'); // React Router를 사용하여 리다이렉션
+                return;
+            }
+
+            console.log('Login successful:', response.data);
+        } catch (error) {
+            setError('Login failed. Please check your credentials.');
+            console.error('Error during login:', error);
+        }
     };
 
     return (
-        <div className="container" style={{marginTop: '100px'}}>
+        <div className="container" style={{ marginTop: '100px' }}>
             <LoginComponent onClickSubmit={handleSubmit} errormsg={error} success={success} />
         </div>
     );
