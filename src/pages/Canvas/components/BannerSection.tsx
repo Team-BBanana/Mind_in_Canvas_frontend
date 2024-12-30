@@ -15,23 +15,16 @@ const BannerSection: React.FC<BannerSectionProps> = ({ onSave }) => {
     };
 
     return (
-        <div
-            style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                width: "100%",
-            }}
-        >
-            <Button type="button" style={{ marginLeft: "10px" }} onClick={handleBack}>
+        <div className={style.bannerSection}>
+            <Button type="button" className={style.bannerButton} onClick={handleBack}>
                 뒤로
             </Button>
 
-            <div style={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+            <div style={{ flexGrow: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <Toolbar />
             </div>
 
-            <Button type="button" style={{ marginRight: "10px" }} onClick={onSave}>
+            <Button type="button" className={style.bannerButton} onClick={onSave}>
                 저장
             </Button>
         </div>

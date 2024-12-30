@@ -1,4 +1,4 @@
-import SingupComponent from "@/pages/Signup/component/SingupComponent.tsx";
+import SignupComponent from "@/pages/Signup/component/SignupComponent";
 import {useState} from "react";
 import axios from "axios";
 import API from "@/api";
@@ -74,7 +74,7 @@ const SignupPage = () => {
     return (
         <div>
             <Header/>
-            <SingupComponent errormsg = {error} success = {success} onClickSubmit={handleSubmit} />
+            <SignupComponent errormsg = {error} success = {success} onClickSubmit={handleSubmit} />
             <Footer/>
         </div>
     )

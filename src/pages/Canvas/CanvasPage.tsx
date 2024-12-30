@@ -1,4 +1,5 @@
 import CanvasSection from "./components/CanvasSection";
+import style from "./CanvasPage.module.css";
 
 const CanvasPage = () => {
   
@@ -34,8 +35,8 @@ const CanvasPage = () => {
   };
 
   return (
-    <div>
-      <CanvasSection onUpload={uploadCanvasImage} />
+    <div className={style.canvasContainer}>
+      <CanvasSection className={style.canvasSection} onUpload={uploadCanvasImage} />
     </div>
   );
 };

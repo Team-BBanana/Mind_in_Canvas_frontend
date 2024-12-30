@@ -12,6 +12,8 @@ body {
 }
 
 .main-content {
-    padding-top: 100px; /* 헤더 높이만큼 여백 추가 */
-    padding-bottom: 60px; /* Footer 높이만큼 여백 추가 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 100%; */
 }

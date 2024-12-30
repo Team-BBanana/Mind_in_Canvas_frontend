@@ -1,7 +1,7 @@
 input {
     width: 100%;
     margin: 10px 0;
-    padding: 12px;
+    padding: 12px 0px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
@@ -14,7 +14,7 @@ input {
     justify-content: flex-end;
     align-items: center;
     margin: 10px 0;
-    width: 105%;
+    width: 100%;
 }
 
 input[type="checkbox"] {
@@ -31,7 +31,7 @@ input[type="checkbox"] {
     cursor: pointer;
     font-family: 'Noto Sans kr';
     font-size: 18px;
-    width: 105%;
+    width: 100%;
 }
 
 .googleLogin {
@@ -46,7 +46,7 @@ input[type="checkbox"] {
 }
 
 .signupContainer{
-    width: 105%;
+    width: 102%;
     display: flex;
     justify-content:space-between; 
     margin-top: 3%;
@@ -178,4 +178,8 @@ input[type="checkbox"] {
     position: sticky;
     width: 160px;
     align-content: left;
+}
+
+.signupLink {
+    cursor: pointer;
 }

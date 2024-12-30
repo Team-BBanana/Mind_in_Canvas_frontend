@@ -13,12 +13,15 @@ import DisplayPage from './pages/Display/DisplayPage.tsx';
 
 function App() {
     const location = useLocation(); // 현재 경로를 가져옴
-    const hiddenHeaderRoutes = ['/canvas']; // Header를 숨길 경로 설정
-
+    const hiddenHeaderRoutes = ['/canvas', '/display/*']; // Header를 숨길 경로 설정
+    const isHeaderHidden = hiddenHeaderRoutes.some(route => 
+        location.pathname === route || 
+        (route.endsWith('*') && location.pathname.startsWith(route.slice(0, -1)))
+    );
     return (
         <div>
             {/* 조건부 Header 렌더링 */}
-            {!hiddenHeaderRoutes.includes(location.pathname) && <Header />}
+            {!isHeaderHidden && <Header />}
             
             {/* Main content container */}
             {location.pathname === '/canvas' ? (

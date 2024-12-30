@@ -19,7 +19,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container" style={{marginTop: '100px'}}>
             <LoginComponent onClickSubmit={handleSubmit} errormsg={error} success={success} />
         </div>
     );
