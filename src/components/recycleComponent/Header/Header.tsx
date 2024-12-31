@@ -3,6 +3,7 @@ import Logo from '@/assets/imgs/textLogo-removebg-preview.svg';
 import ReportIcon from '@/assets/imgs/report.svg';
 import { useNavigate } from 'react-router-dom';
 import API from '@/api';
+import { AxiosError } from 'axios';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Header = () => {
                 console.error('Logout failed');
             }
         } catch (error) {
-            if (error.response && error.response.status === 401) {
+            if (error instanceof AxiosError && error.response && error.response.status === 401) {
                 console.error('Unauthorized: Redirecting to login');
                 navigate('/login');
             } else {
