@@ -13,6 +13,7 @@ interface FormData {
     role: string;
     socialProvider: string;
     phoneNumber: string;
+    pin: string;
 }
 
 
@@ -29,7 +30,8 @@ const SignupPage = () => {
             const result = await API.userApi.signupUser({
                 name: formData.name,
                 email: formData.email,
-                password: formData.password,
+                password: formData.password, 
+                pin: formData.pin,
                 role : "ROLE_USER",
                 socialProvider: "GOOGLE",
                 phoneNumber: "010-5096-6584"
@@ -56,10 +58,14 @@ const SignupPage = () => {
                 if (data.password) {
                     errors.push(data.password);
                 }
+                if (data.pin) {
+                    errors.push(data.pin);
+                }
+
 
                 setError(errors.join('\n'));
             } else {
-                setError('Signup failed. Please try again.');
+                setError('회원가입에 실패했습니다. 다시 시도해주세요.');
             }
             setSuccess(null);
         }
