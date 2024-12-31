@@ -74,7 +74,7 @@ const SignupPage = () => {
     return (
         <div>
             <Header/>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 80px)' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <SignupComponent errormsg = {error} success = {success} onClickSubmit={handleSubmit} />
             </div>
             <Footer/>

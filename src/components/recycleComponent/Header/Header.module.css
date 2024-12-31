@@ -18,6 +18,12 @@
     max-width: 200px; /* Ensure it doesn't grow too large */
 }
 
+.buttonGroup {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
 .logoutButton {
     background-color: transparent;
     color: #424242;
@@ -34,6 +40,16 @@
 }
 
 .logoutButton:hover {
+    background-color: #f6821f;
+}
+
+.settingsButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.settingButton:hover {
     background-color: #f6821f;
 }
 
