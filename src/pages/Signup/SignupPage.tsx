@@ -4,6 +4,7 @@ import axios from "axios";
 import API from "@/api";
 import Header from "@/components/recycleComponent/Header/Header";
 import Footer from "@/components/recycleComponent/Footer/Footer"
+import { useNavigate } from "react-router-dom";
 
 interface FormData {
     name: string;
@@ -12,6 +13,7 @@ interface FormData {
     role: string;
     socialProvider: string;
     phoneNumber: string;
+    pin: string;
 }
 
 
@@ -19,6 +21,7 @@ const SignupPage = () => {
 
     const [error, setError] = useState<string| null>(null);
     const [success, setSuccess] = useState<string | null>(null);
+    const navigate = useNavigate();
 
 
     const handleSubmit = async (formData : FormData) => {
@@ -27,14 +30,16 @@ const SignupPage = () => {
             const result = await API.userApi.signupUser({
                 name: formData.name,
                 email: formData.email,
-                password: formData.password,
+                password: formData.password, 
+                pin: formData.pin,
                 role : "ROLE_USER",
                 socialProvider: "GOOGLE",
                 phoneNumber: "010-5096-6584"
             });
             if ( result.status == 201){
-                setSuccess('Signup successful!');
+                setSuccess('회원가입이 완료되었습니다!');
                 setError(null);
+                navigate('/signup/kids');
             }
             setError(result.data.body);
 
@@ -53,10 +58,14 @@ const SignupPage = () => {
                 if (data.password) {
                     errors.push(data.password);
                 }
+                if (data.pin) {
+                    errors.push(data.pin);
+                }
+
 
                 setError(errors.join('\n'));
             } else {
-                setError('Signup failed. Please try again.');
+                setError('회원가입에 실패했습니다. 다시 시도해주세요.');
             }
             setSuccess(null);
         }
@@ -65,7 +74,7 @@ const SignupPage = () => {
     return (
         <div>
             <Header/>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 80px)' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <SignupComponent errormsg = {error} success = {success} onClickSubmit={handleSubmit} />
             </div>
             <Footer/>

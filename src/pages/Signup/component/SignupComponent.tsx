@@ -8,6 +8,7 @@ interface FormData {
     email: string;
     password: string;
     password_confirm: string;
+    pin: string;
 }
 
 interface SignupProps {
@@ -21,12 +22,14 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const password_confirmRef = useRef<HTMLInputElement>(null);
+    const pinRef = useRef<HTMLInputElement>(null);
 
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
         password: '',
-        password_confirm: ''
+        password_confirm: '',
+        pin: ''
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,8 +43,9 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
         const email = emailRef.current?.value || "";
         const password = passwordRef.current?.value || "";
         const password_confirm = password_confirmRef.current?.value || "";
+        const pin = pinRef.current?.value || "";
 
-        onClickSubmit({ name, email, password, password_confirm });
+        onClickSubmit({ name, email, password, password_confirm, pin });
     };
 
     return (
@@ -87,6 +91,16 @@ const SignupComponent: React.FC<SignupProps> = ({ errormsg, success, onClickSubm
                         value={formData.password_confirm}
                         onChange={handleChange}
                         ref={password_confirmRef}
+                        required
+                    />
+                    <Input
+                        type="number"
+                        id="pin"
+                        name="pin"
+                        placeholder="마음읽기 PIN번호"
+                        value={formData.pin}
+                        onChange={handleChange}
+                        ref={pinRef}
                         required
                     />
 

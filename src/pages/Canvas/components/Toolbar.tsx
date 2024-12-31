@@ -8,7 +8,6 @@ import { fabric } from "fabric";
 import { useEffect } from "react";
 
 import ToolButton from "./ToolButton";
-import ColorPanel from "./ColorPanel";
 
 import activeToolAtom from "./stateActiveTool";
 import canvasInstanceAtom from "./stateCanvasInstance";
@@ -177,7 +176,6 @@ const Toolbar = () => {
                 title="Hand Tool"
             />
             </div>
-
           </div>
         </div>
   );

@@ -10,6 +10,8 @@ import Footer from './components/recycleComponent/Footer/Footer.tsx'; // Footer 
 import { useLocation } from 'react-router-dom'; // useLocation import
 import SelectKidsPage from './pages/SelectKids/SelectKidsPage.tsx';
 import DisplayPage from './pages/Display/DisplayPage.tsx';
+import SignupKidsPage from './pages/Signup/SignupKidsPage.tsx';
+import ReportPage from './pages/Report/ReportPage.tsx';
 
 function App() {
     const location = useLocation(); // 현재 경로를 가져옴
@@ -29,14 +31,16 @@ function App() {
                     <Route path="/canvas" element={<CanvasPage />} />
                 </Routes>
             ) : (
-                <div className="main-content">
+                <div className="main-content" style={{ height: ['/login', '/signup', '/signup/kids', '/selectkids', '/report'].includes(location.pathname) ? '100vh' : 'auto' }}>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
                         <Route path="/canvas" element={<CanvasPage />} />
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/signup" element={<SignupPage />} />
+                        <Route path="/signup/kids" element={<SignupKidsPage />} />
                         <Route path="/selectkids" element={<SelectKidsPage/>} />
                         <Route path="/display/:id" element={<DisplayPage />} />
+                        <Route path="/report" element={<ReportPage />} />
                     </Routes>
                 </div>
             )}

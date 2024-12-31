@@ -8,6 +8,7 @@ interface UserData {
     role?: string;
     socialProvider?: string;
     phoneNumber?: string;
+    pin?: string;
 }
 
 export async function getUserInfo(): Promise<any> {
@@ -70,6 +71,7 @@ export async function signupUser(data: UserData): Promise<any> {
         role:  data.role,
         socialProvider: data.socialProvider,
         phoneNumber: data.phoneNumber,
+        pin: data.pin,
     };
 
     return await CanvasClient.post(url, JSON.stringify(requestData), {
