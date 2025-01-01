@@ -8,14 +8,15 @@ import ColorPanel from "@/pages/Canvas/components/ColorPanel.tsx";
 import style from "../CanvasPage.module.css";
 
 interface CanvasSectionProps {
-  onUpload: (dataURL: string) => void;
   className?: string;
+  onUpload: (dataURL: string) => void;
+  canvasRef: React.RefObject<HTMLCanvasElement>;
+  onChange: () => void;
 }
 
-const CanvasSection: React.FC<CanvasSectionProps> = ({ onUpload, className }) => {
+const CanvasSection = ({ className, onUpload, canvasRef, onChange }: CanvasSectionProps) => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const [canvas, setCanvas] = useAtom(canvasInstanceAtom);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 }); // 팔레트의 현재 위치 상태 추가
@@ -82,10 +83,14 @@ const CanvasSection: React.FC<CanvasSectionProps> = ({ onUpload, className }) =>
     setIsDragging(false);
   };
 
+  const handleChange = () => {
+    onChange();
+  };
+
   return (
-    <div className={className} ref={canvasContainerRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
+    <div className={className} ref={canvasContainerRef} onMouseMove={handleMouseMove} onMouseUp={handleChange}>
       <BannerSection onSave={saveCanvasAsImage} />
-      <canvas ref={canvasRef} className={style.canvasContainer}/>
+      <canvas ref={canvasRef} className={style.canvasContainer} onTouchEnd={handleChange}/>
       <div
         id="color-panel"
         onMouseDown={handleMouseDown}

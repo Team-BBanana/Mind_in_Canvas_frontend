@@ -1,102 +1,106 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import CanvasSection from "./components/CanvasSection";
 import style from "./CanvasPage.module.css";
+import debounce from 'lodash/debounce';
 
-// Debounce 함수
-const debounce = (func: Function, delay: number) => {
-  let timeoutId: NodeJS.Timeout;
-  return (...args: any[]) => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    timeoutId = setTimeout(() => {
-      func(...args);
-    }, delay);
-  };
+type WebSocketMessage = {
+  canvas_id?: string;
+  image_url?: string;
 };
 
 const CanvasPage = () => {
-  const [lastDrawTime, setLastDrawTime] = useState<number>(Date.now());
-  const uploadTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const socketRef = useRef<WebSocket | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [canvasId, setCanvasId] = useState<string>("");
+  const [isConnected, setIsConnected] = useState<boolean>(false);
+  const reconnectTimeoutRef = useRef<number>();
 
-  const uploadCanvasImage = (dataURL: string) => {
-    const blob = dataURLToBlob(dataURL);
-    const formData = new FormData();
-    formData.append('file', blob, 'canvas-image.png');
+  const connectWebSocket = useCallback(() => {
+    if (socketRef.current?.readyState === WebSocket.OPEN) return;
 
-    fetch('http://localhost:3001/upload', {
-      method: 'POST',
-      body: formData,
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('File uploaded successfully:', data.url);
-      })
-      .catch(error => {
-        console.error('Error uploading file:', error);
-      });
-  };
+    try {
+      const ws = new WebSocket(import.meta.env.VITE_WEBSOCKET_URL);
+      
+      ws.onopen = () => {
+        console.log('WebSocket 연결 성공');
+        setIsConnected(true);
+        try {
+          ws.send(JSON.stringify({ 'canvas_id': '임시 canvas_id' }));
+        } catch (error) {
+          console.error('메시지 전송 실패:', error);
+        }
+      };
 
-  // Helper function to convert data URL to Blob
-  const dataURLToBlob = (dataURL: string) => {
-    const byteString = atob(dataURL.split(',')[1]);
-    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
+      ws.onerror = (error) => {
+        console.error('WebSocket 에러:', error);
+        console.log('WebSocket URL:', import.meta.env.VITE_WEBSOCKET_URL);
+        setIsConnected(false);
+      };
+
+      ws.onclose = (event) => {
+        console.log('WebSocket 연결 종료. 코드:', event.code, '사유:', event.reason);
+        setIsConnected(false);
+        socketRef.current = null;
+        
+        if (event.code !== 1000) {
+          console.log('재연결 시도 중...');
+          reconnectTimeoutRef.current = window.setTimeout(() => {
+            connectWebSocket();
+          }, 3000);
+        }
+      };
+
+      socketRef.current = ws;
+    } catch (error) {
+      console.error('WebSocket 초기화 실패:', error);
+      setIsConnected(false);
     }
-    return new Blob([ab], { type: mimeString });
-  };
+  }, []);
 
-  // 캔버스에 그림이 그려질 때 호출되는 함수
-  const handleDraw = debounce((dataURL: string) => {
-    setLastDrawTime(Date.now());
-    uploadCanvasImage(dataURL);
-  }, 600); // 300ms 후에 호출
-
-  // 상태 감지 및 AI 서버로 이미지 전송
   useEffect(() => {
-    const checkIdleTime = () => {
-      const currentTime = Date.now();
-      if (currentTime - lastDrawTime >= 5000) { // 5초 이상 경과
-        // 현재 캔버스의 이미지를 AI 서버로 전송
-        const canvasDataURL = ""; // 현재 캔버스의 dataURL을 가져오는 로직 필요
-        sendToAiServer(canvasDataURL);
-      }
-    };
-
-    const intervalId = setInterval(checkIdleTime, 1000); // 1초마다 체크
-
+    connectWebSocket();
     return () => {
-      clearInterval(intervalId);
-      if (uploadTimeoutRef.current) {
-        clearTimeout(uploadTimeoutRef.current);
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
       }
+      socketRef.current?.close(1000);
     };
-  }, [lastDrawTime]);
+  }, [connectWebSocket]);
 
-  const sendToAiServer = (dataURL: string) => {
-    // AI 서버로 요청 보내기
-    fetch('http://localhost:3001/ai', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ image: dataURL }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('AI server response:', data);
-      })
-      .catch(error => {
-        console.error('Error sending to AI server:', error);
-      });
-  };
+  const sendCanvasImage = useCallback((type: 'CANVAS_UPDATE' | 'CANVAS_SAVE') => {
+    if (!canvasRef.current || socketRef.current?.readyState !== WebSocket.OPEN) return;
+    
+    const message: WebSocketMessage = {
+      canvas_id: canvasId,
+      image_url: canvasRef.current.toDataURL()
+    };
+    
+    socketRef.current.send(JSON.stringify(message));
+  }, [canvasId]);
+
+  const handleDraw = useCallback(() => {
+    sendCanvasImage('CANVAS_UPDATE');
+  }, [sendCanvasImage]);
+
+  const debouncedSaveCanvas = useCallback(
+    debounce(() => sendCanvasImage('CANVAS_SAVE'), 10000),
+    [sendCanvasImage]
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedSaveCanvas.cancel();
+    };
+  }, [debouncedSaveCanvas]);
 
   return (
     <div className={style.canvasContainer}>
-      <CanvasSection className={style.canvasSection} onUpload={handleDraw} />
+      <CanvasSection 
+        className={style.canvasSection} 
+        onUpload={handleDraw}
+        canvasRef={canvasRef}
+        onChange={debouncedSaveCanvas}
+      />
     </div>
   );
 };
