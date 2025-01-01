@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import CanvasSection from "./components/CanvasSection";
 import style from "./CanvasPage.module.css";
+import API from "@/api";
 import debounce from 'lodash/debounce';
 
 type WebSocketMessage = {
@@ -15,7 +16,28 @@ const CanvasPage = () => {
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const reconnectTimeoutRef = useRef<number>();
 
-  const connectWebSocket = useCallback(() => {
+  useEffect(() => {
+    const createCanvasAndConnectWebSocket = async () => {
+      try {
+        const response = await API.canvasApi.createCanvas({ title: "임시 제목" });
+        console.log('Canvas created:', response);
+        
+        // Assuming the response contains a canvasId
+        const newCanvasId = response.data.canvasId;
+        setCanvasId(newCanvasId);
+
+        // Connect WebSocket after successful canvas creation
+        connectWebSocket(newCanvasId);
+        
+      } catch (error) {
+        console.error('Error creating canvas:', error);
+      }
+    };
+
+    createCanvasAndConnectWebSocket();
+  }, []);
+
+  const connectWebSocket = useCallback((canvasId: string) => {
     if (socketRef.current?.readyState === WebSocket.OPEN) return;
 
     try {
@@ -25,7 +47,7 @@ const CanvasPage = () => {
         console.log('WebSocket 연결 성공');
         setIsConnected(true);
         try {
-          ws.send(JSON.stringify({ 'canvas_id': '임시 canvas_id' }));
+          ws.send(JSON.stringify({ 'canvas_id': canvasId }));
         } catch (error) {
           console.error('메시지 전송 실패:', error);
         }
@@ -45,7 +67,7 @@ const CanvasPage = () => {
         if (event.code !== 1000) {
           console.log('재연결 시도 중...');
           reconnectTimeoutRef.current = window.setTimeout(() => {
-            connectWebSocket();
+            connectWebSocket(canvasId);
           }, 3000);
         }
       };
@@ -56,16 +78,6 @@ const CanvasPage = () => {
       setIsConnected(false);
     }
   }, []);
-
-  useEffect(() => {
-    connectWebSocket();
-    return () => {
-      if (reconnectTimeoutRef.current) {
-        clearTimeout(reconnectTimeoutRef.current);
-      }
-      socketRef.current?.close(1000);
-    };
-  }, [connectWebSocket]);
 
   const sendCanvasImage = useCallback((type: 'CANVAS_UPDATE' | 'CANVAS_SAVE') => {
     if (!canvasRef.current || socketRef.current?.readyState !== WebSocket.OPEN) return;
