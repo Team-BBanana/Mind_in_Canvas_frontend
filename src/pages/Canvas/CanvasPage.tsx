@@ -23,6 +23,37 @@ const CanvasPage = () => {
   const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
 
+  useEffect(() => {
+    const createCanvasAndConnectWebSocket = async () => {
+      try {
+        const response = await API.canvasApi.createCanvas({ title: "임시 제목" });
+        console.log('Canvas created:', response);
+
+        // Extract redirect_url from the response
+        const redirectUrl = response.data.redirect_url;
+        if (redirectUrl) {
+          const urlParams = new URLSearchParams(redirectUrl.split('?')[1]);
+          const robotId = urlParams.get('robot_id');
+          const canvasId = urlParams.get('canvas_id');
+          const name = urlParams.get('name');
+          const age = urlParams.get('age');
+
+          console.log('Parsed URL Parameters:', { robotId, canvasId, name, age });
+
+          // Use the canvasId for WebSocket connection
+          if (canvasId) {
+            setCanvasId(canvasId);
+            connectWebSocket(canvasId);
+          }
+        }
+      } catch (error) {
+        console.error('Error creating canvas:', error);
+      }
+    };
+
+    createCanvasAndConnectWebSocket();
+  }, []);
+
   const connectWebSocket = useCallback((canvasId: string) => {
     if (socketRef.current) {
       if (socketRef.current.readyState === WebSocket.OPEN) {
