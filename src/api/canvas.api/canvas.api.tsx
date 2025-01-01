@@ -1,7 +1,7 @@
 import { CanvasClient } from '..';
 
 const createCanvas = async(data: {title: string}) => {
-    const url = `/kids/generateKidToken`;
+    const url = `/canvas/create`;
 
     return await CanvasClient.post(url,JSON.stringify(data),{
         method: "POST",
