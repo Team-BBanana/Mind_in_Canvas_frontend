@@ -83,18 +83,24 @@ const CanvasSection = ({ className, onUpload, canvasRef, onChange }: CanvasSecti
     onChange();
   };
 
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    handleChange();
+  };
+
   return (
-    <div className={className} ref={canvasContainerRef} onMouseMove={handleMouseMove} onMouseUp={handleChange}>
+    <div className={className} ref={canvasContainerRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
       <BannerSection onSave={saveCanvasAsImage} />
       <canvas ref={canvasRef} className={style.canvasContainer} onTouchEnd={handleChange}/>
       <div
         id="color-panel"
         onMouseDown={handleMouseDown}
+        onMouseUp={() => setIsDragging(false)}
         style={{ 
-          cursor: "move", 
+          cursor: isDragging ? "grabbing" : "grab", 
           position: "absolute", 
-          top: `${panelPosition.y}px`, // 팔레트의 Y 위치
-          left: `${panelPosition.x}px`, // 팔레트의 X 위치
+          top: `${panelPosition.y}px`,
+          left: `${panelPosition.x}px`,
         }}
       >
         <ColorPanel className={style.colorPanel} />
