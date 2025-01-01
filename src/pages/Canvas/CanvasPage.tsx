@@ -4,6 +4,8 @@ import style from "./CanvasPage.module.css";
 import API from "@/api";
 import debounce from 'lodash/debounce';
 
+const aiServerUrl = "ws://127.0.0.1:8081/drawing/send";
+
 type WebSocketMessage = {
   canvas_id?: string;
   image_url?: string;
@@ -41,13 +43,14 @@ const CanvasPage = () => {
     if (socketRef.current?.readyState === WebSocket.OPEN) return;
 
     try {
-      const ws = new WebSocket(import.meta.env.VITE_WEBSOCKET_URL);
+      const ws = new WebSocket(aiServerUrl);
       
       ws.onopen = () => {
         console.log('WebSocket 연결 성공');
         setIsConnected(true);
         try {
-          ws.send(JSON.stringify({ 'canvas_id': canvasId }));
+          ws.send(JSON.stringify({ 'canvas_id': 'canvasId' }));
+          console.log('WebSocket 메시지 전송:', JSON.stringify({ 'canvas_id': 'canvasId' }));
         } catch (error) {
           console.error('메시지 전송 실패:', error);
         }
@@ -55,7 +58,7 @@ const CanvasPage = () => {
 
       ws.onerror = (error) => {
         console.error('WebSocket 에러:', error);
-        console.log('WebSocket URL:', import.meta.env.VITE_WEBSOCKET_URL);
+        console.log('WebSocket URL:', aiServerUrl);
         setIsConnected(false);
       };
 
@@ -84,7 +87,7 @@ const CanvasPage = () => {
     
     const message: WebSocketMessage = {
       canvas_id: canvasId,
-      image_url: canvasRef.current.toDataURL()
+      image_url: canvasRef.current.toDataURL('image/png', 1.0)
     };
     
     socketRef.current.send(JSON.stringify(message));

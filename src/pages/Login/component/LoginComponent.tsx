@@ -36,11 +36,14 @@ const LoginComponent: React.FC<LoginProps> = ({ errormsg, success, onClickSubmit
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         const email = emailRef.current?.value || "";
         const password = passwordRef.current?.value || "";
-        onClickSubmit({ email, password });
+        await onClickSubmit({ email, password });
+        if (success) {
+            navigate('/selectkid');
+        }
     };
 
     const handleClick = (path: string) => {
