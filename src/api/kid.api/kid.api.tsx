@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { CanvasClient } from '..';
 
 
@@ -19,7 +18,13 @@ const tokenGenerate = async(data : {kidId: string}) => {
 }
 
 const signupKids = async (data: { name: string; age: number }) => {
-    return await axios.post('/api/kids/signup', data);
+    return await CanvasClient.post('/kids/signup', JSON.stringify(data),{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json", // JSON 요청임을 명시
+        },
+        withCredentials: true,
+    });
 };
 
 const kidApi = {
