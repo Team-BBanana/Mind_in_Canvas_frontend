@@ -78,11 +78,7 @@ const CanvasSection = ({ className, onUpload, canvasRef, onChange }: CanvasSecti
       setPanelPosition({ x: newX, y: newY }); // 팔레트의 위치 상태 업데이트
     }
   };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
+  
   const handleChange = () => {
     onChange();
   };
