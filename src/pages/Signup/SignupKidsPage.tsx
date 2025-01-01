@@ -27,7 +27,7 @@ const SignupKidsPage = () => {
             if (result.status === 201 || result.status === 200) {
                 setSuccess('아이 등록이 완료되었습니다!');
                 setError(null);
-                navigate('/');
+                navigate('/selectkids');
                 return;
             }
             
