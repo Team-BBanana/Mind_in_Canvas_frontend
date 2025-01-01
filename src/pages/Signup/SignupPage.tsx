@@ -39,7 +39,7 @@ const SignupPage = () => {
             if ( result.status == 201){
                 setSuccess('회원가입이 완료되었습니다!');
                 setError(null);
-                navigate('/signup/kids');
+                navigate('/login');
             }
             setError(result.data.body);
 
