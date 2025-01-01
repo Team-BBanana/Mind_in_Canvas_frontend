@@ -17,8 +17,10 @@ const LoginPage = () => {
         try {
             const response = await API.userApi.loginUser(formData); // 로그인 API 호출
             if (response.status === 200) {
-                console.log('Login successful:', response.data);
-                navigate('/selectkids');
+                console.log('Login successful:', response.data); // 성공적인 로그인 데이터 출력
+                // 서버에서 보낸 데이터가 JWT라면 로컬 저장소에 저장할 수 있습니다.
+                // 예시: localStorage.setItem("jwt", response.data.token);
+                navigate('/selectkids'); // React Router를 사용하여 리다이렉션
                 setSuccess("Login successful!");
                 setError(null);
             }

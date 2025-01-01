@@ -11,6 +11,10 @@ const MainComponent: React.FC = () => {
         <div className={style.container}>
             <h1 className={style.title}>✨ 내 그림 모아보기 ✨</h1>
             <div className={style.cardGrid}>
+                <CardComponent
+                    isAddButton={true}
+                    onClick={() => navigate('/canvas')}
+                />
                 {cardData.map((card, index) => (
                     <CardComponent
                         key={index}
@@ -19,10 +23,6 @@ const MainComponent: React.FC = () => {
                         onClick={() => navigate(`/display/${index + 1}`)}
                     />
                 ))}
-                <CardComponent
-                    isAddButton={true}
-                    onClick={() => navigate('/canvas')}
-                />
             </div>
         </div>
     );
