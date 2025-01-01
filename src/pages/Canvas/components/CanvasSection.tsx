@@ -91,7 +91,7 @@ const CanvasSection = ({ className, onUpload, canvasRef, onChange }: CanvasSecti
   return (
     <div className={className} ref={canvasContainerRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
       <BannerSection onSave={saveCanvasAsImage} />
-      <canvas ref={canvasRef} className={style.canvasContainer} onTouchEnd={handleChange}/>
+      <canvas ref={canvasRef} className={style.canvasContainer} onTouchEnd={handleChange} id="mycanvas"/>
       <div
         id="color-panel"
         onMouseDown={handleMouseDown}

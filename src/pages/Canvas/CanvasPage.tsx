@@ -3,6 +3,7 @@ import CanvasSection from "./components/CanvasSection";
 import style from "./CanvasPage.module.css";
 import API from "@/api";
 import debounce from 'lodash/debounce';
+import { useLocation, useNavigate } from "react-router-dom";
 
 const aiServerUrl = "ws://127.0.0.1:8081/drawing/send";
 
@@ -12,53 +13,48 @@ type WebSocketMessage = {
 };
 
 const CanvasPage = () => {
+  const location = useLocation();
+  const shouldCreateCanvas = location.state?.createNew === true;
   const socketRef = useRef<WebSocket | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [canvasId, setCanvasId] = useState<string>("");
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const reconnectTimeoutRef = useRef<number>();
-
-  useEffect(() => {
-    const createCanvasAndConnectWebSocket = async () => {
-      try {
-        const response = await API.canvasApi.createCanvas({ title: "임시 제목" });
-        console.log('Canvas created:', response);
-        
-        // Assuming the response contains a canvasId
-        const newCanvasId = response.data.canvasId;
-        setCanvasId(newCanvasId);
-
-        // Connect WebSocket after successful canvas creation
-        connectWebSocket(newCanvasId);
-        
-      } catch (error) {
-        console.error('Error creating canvas:', error);
-      }
-    };
-
-    createCanvasAndConnectWebSocket();
-  }, []);
+  const navigate = useNavigate();
+  const [showNotification, setShowNotification] = useState(false);
 
   const connectWebSocket = useCallback((canvasId: string) => {
-    if (socketRef.current?.readyState === WebSocket.OPEN) return;
+    if (socketRef.current) {
+      if (socketRef.current.readyState === WebSocket.OPEN) {
+        console.log('기존 웹소켓 연결 재사용');
+        try {
+          socketRef.current.send(JSON.stringify({ canvas_id: canvasId }));
+          setCanvasId(canvasId);
+        } catch (error) {
+          console.error('기존 소켓 메시지 전송 실패:', error);
+          socketRef.current.close();
+        }
+        return;
+      } else if (socketRef.current.readyState === WebSocket.CONNECTING) {
+        console.log('웹소켓 연결 중...');
+        return;
+      }
+    }
 
     try {
       const ws = new WebSocket(aiServerUrl);
-      
+
       ws.onopen = () => {
         console.log('WebSocket 연결 성공');
         setIsConnected(true);
-        try {
-          ws.send(JSON.stringify({ 'canvas_id': 'canvasId' }));
-          console.log('WebSocket 메시지 전송:', JSON.stringify({ 'canvas_id': 'canvasId' }));
-        } catch (error) {
-          console.error('메시지 전송 실패:', error);
-        }
+        setShowNotification(true);
+        setTimeout(() => setShowNotification(false), 3000);
+        ws.send(JSON.stringify({ canvas_id: canvasId }));
+        console.log('WebSocket 메시지 전송:', JSON.stringify({ 'canvas_id': canvasId }));
       };
 
       ws.onerror = (error) => {
-        console.error('WebSocket 에러:', error);
-        console.log('WebSocket URL:', aiServerUrl);
+        console.error('웹소켓 에러 발생:', error);
         setIsConnected(false);
       };
 
@@ -82,13 +78,63 @@ const CanvasPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const createCanvasAndConnectWebSocket = async () => {
+      try {
+        if (shouldCreateCanvas) {
+          const response = await API.canvasApi.createCanvas({ title: "임시 제목" });
+          const redirectUrl = response.data.redirect_url;
+          if (redirectUrl) {
+            const urlParams = new URLSearchParams(redirectUrl.split('?')[1]);
+            const robotId = urlParams.get('robot_id');
+            const newCanvasId = urlParams.get('canvas_id') || '';
+            const name = urlParams.get('name');
+            const age = urlParams.get('age');
+
+            console.log('Parsed URL Parameters:', { robotId, newCanvasId, name, age });
+
+            sessionStorage.setItem('canvasId', newCanvasId);
+            setCanvasId(newCanvasId);
+            connectWebSocket(newCanvasId);
+          }
+        } else { 
+          const existingCanvasId = sessionStorage.getItem('canvasId') || '';
+          if (!existingCanvasId) {
+            console.warn('No existing canvasId found. Redirecting to main page.');
+            navigate('/');
+            return;
+          }
+          setCanvasId(existingCanvasId);
+          connectWebSocket(existingCanvasId);
+        }
+      } catch (error) {
+        console.error('Error creating canvas:', error);
+      }
+    };
+
+    createCanvasAndConnectWebSocket();
+
+    return () => {
+      if (socketRef.current) {
+        console.log('컴포넌트 언마운트: 웹소켓 연결 정리');
+        socketRef.current.close(1000, '정상 종료');
+        socketRef.current = null;
+      }
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
+    };
+  }, [shouldCreateCanvas, connectWebSocket, navigate]);
+
   const sendCanvasImage = useCallback((type: 'CANVAS_UPDATE' | 'CANVAS_SAVE') => {
     if (!canvasRef.current || socketRef.current?.readyState !== WebSocket.OPEN) return;
     
     const message: WebSocketMessage = {
       canvas_id: canvasId,
-      image_url: canvasRef.current.toDataURL('image/png', 1.0)
+      image_url: canvasRef.current.toDataURL('image/png', 1.0).split(',')[1]
     };
+
+    console.log('Sending message:', message);
     
     socketRef.current.send(JSON.stringify(message));
   }, [canvasId]);
@@ -104,12 +150,27 @@ const CanvasPage = () => {
 
   useEffect(() => {
     return () => {
+      if (socketRef.current) {
+        console.log('컴포넌트 언마운트: 웹소켓 연결 정리');
+        socketRef.current.close(1000, '정상 종료');
+        socketRef.current = null;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
       debouncedSaveCanvas.cancel();
     };
   }, [debouncedSaveCanvas]);
 
   return (
     <div className={style.canvasContainer}>
+      {showNotification && (
+        <div className={style.notification}>
+          친구와 함께 그림을 그려보아요🎨
+        </div>
+      )}
       <CanvasSection 
         className={style.canvasSection} 
         onUpload={handleDraw}
