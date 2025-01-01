@@ -1,7 +1,7 @@
 import { CanvasClient } from '..';
 
 const createCanvas = async(data: {title: string}) => {
-    const url = `/canvas/create`;
+    const url = `/canvas/createCanvas`;
 
     return await CanvasClient.post(url,JSON.stringify(data),{
         method: "POST",

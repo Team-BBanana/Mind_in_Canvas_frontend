@@ -23,14 +23,24 @@ const CanvasPage = () => {
       try {
         const response = await API.canvasApi.createCanvas({ title: "임시 제목" });
         console.log('Canvas created:', response);
-        
-        // Assuming the response contains a canvasId
-        const newCanvasId = response.data.canvasId;
-        setCanvasId(newCanvasId);
 
-        // Connect WebSocket after successful canvas creation
-        connectWebSocket(newCanvasId);
-        
+        // Extract redirect_url from the response
+        const redirectUrl = response.data.redirect_url;
+        if (redirectUrl) {
+          const urlParams = new URLSearchParams(redirectUrl.split('?')[1]);
+          const robotId = urlParams.get('robot_id');
+          const canvasId = urlParams.get('canvas_id');
+          const name = urlParams.get('name');
+          const age = urlParams.get('age');
+
+          console.log('Parsed URL Parameters:', { robotId, canvasId, name, age });
+
+          // Use the canvasId for WebSocket connection
+          if (canvasId) {
+            setCanvasId(canvasId);
+            connectWebSocket(canvasId);
+          }
+        }
       } catch (error) {
         console.error('Error creating canvas:', error);
       }
@@ -49,8 +59,8 @@ const CanvasPage = () => {
         console.log('WebSocket 연결 성공');
         setIsConnected(true);
         try {
-          ws.send(JSON.stringify({ 'canvas_id': 'canvasId' }));
-          console.log('WebSocket 메시지 전송:', JSON.stringify({ 'canvas_id': 'canvasId' }));
+          ws.send(JSON.stringify({ canvas_id: canvasId }));
+          console.log('WebSocket 메시지 전송:', JSON.stringify({ 'canvas_id': canvasId }));
         } catch (error) {
           console.error('메시지 전송 실패:', error);
         }
@@ -87,8 +97,10 @@ const CanvasPage = () => {
     
     const message: WebSocketMessage = {
       canvas_id: canvasId,
-      image_url: canvasRef.current.toDataURL('image/png', 1.0)
+      image_url: canvasRef.current.toDataURL('image/png', 1.0).split(',')[1]
     };
+
+    console.log('Sending message:', message);
     
     socketRef.current.send(JSON.stringify(message));
   }, [canvasId]);
