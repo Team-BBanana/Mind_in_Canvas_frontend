@@ -1,4 +1,4 @@
-import { CanvasClient } from ".."
+import { CanvasClient } from "..";
 
 // 타입 정의
 interface UserData {
