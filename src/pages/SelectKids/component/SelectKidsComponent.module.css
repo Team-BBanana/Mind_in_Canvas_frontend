@@ -4,18 +4,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
-    padding: 2rem;
+    height: 100%;
 }
 
 .title {
+    align-items: end;
     font-size: 2rem;
     font-weight: 700;
     color: #2c3e50;
-    margin: 2rem 0;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    font-family: 'Noto Sans KR', sans-serif;
-    letter-spacing: 1px;
 }
 
 .accountlist {

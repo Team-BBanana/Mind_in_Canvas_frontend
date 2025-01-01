@@ -31,7 +31,10 @@ function App() {
                     <Route path="/canvas" element={<CanvasPage />} />
                 </Routes>
             ) : (
-                <div className="main-content" style={{ height: ['/login', '/signup', '/signup/kids', '/selectkids', '/report'].includes(location.pathname) ? '100vh' : 'auto' }}>
+                <div className="main-content" style={{ 
+                    marginTop: ['/login', '/signup', '/signup/kids', '/selectkids', '/report'].includes(location.pathname) ? '100px' : '0',
+                    minHeight: 'calc(100vh - 160px)' // 헤더(60px) + 푸터(100px) 높이를 제외
+                }}>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
                         <Route path="/canvas" element={<CanvasPage />} />
