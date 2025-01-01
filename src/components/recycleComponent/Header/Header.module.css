@@ -1,7 +1,7 @@
 .header {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Space between logo and button */
+    justify-content: space-between; 
     padding: 10px 20px;
     background-color: #feb913;
     font-size: large;
@@ -14,8 +14,8 @@
 }
 
 .logo {
-    width: 100%; /* Adjusted to a more reasonable size */
-    max-width: 200px; /* Ensure it doesn't grow too large */
+    width: 100%;
+    max-width: 200px;
 }
 
 .buttonGroup {
@@ -55,17 +55,19 @@
 
 @media screen and (max-width: 900px) {
     .header {
-        flex-direction: column; /* Stack items vertically on smaller screens */
-        align-items: flex-start; /* Align items to the start */
         padding: 10px;
     }
 
-    .logo {
-        width: 20%; /* Adjust logo size for smaller screens */
-        max-width: 80px;
+    .buttonGroup {
+        gap: 0.5rem;
     }
 
     .logoutButton {
-        margin-top: 10px; /* Add space between logo and button */
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .settingsButton img {
+        height: 30px;
     }
 }
