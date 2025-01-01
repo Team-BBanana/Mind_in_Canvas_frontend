@@ -1,33 +1,34 @@
-import style from "../SelectKidsComponent.module.css"
-import { kidsData } from "../kidsData"
+import React from 'react';
+import style from "./SelectKidsComponent.module.css"
+import KidImage from "@/assets/imgs/kid1.svg?react";
 
-const accounts = kidsData;
+interface Kid {
+    kidId: string;
+    name: string;
+    age: number;
+    createdAt: string;
+    updatedAt: string;
+}
 
-const SelectKidComponent = () => {
-    const handleSelectKid = (id: number, name: string) => {
-        sessionStorage.setItem('selectedKid', JSON.stringify({ id, name }));
-    };
+interface SelectKidsComponentProps {
+    kid: Kid;
+    onKidSelect: (kidId: string) => void;
+}
+
+const SelectKidComponent: React.FC<SelectKidsComponentProps> = ({ kid, onKidSelect }) => {
+
 
     return (
         <div className={style.container}>
-            <h1 className={style.title}>✨그림을 그릴 아이를 선택해주세요✨</h1>
-            <div className={style.accountlist}>
-                {accounts.map(account => (
-                    <div
-                        key={account.id} 
-                        className={style.accountItem}
-                        onClick={() => handleSelectKid(account.id, account.name)}
-                    >
-                        <img 
-                            src={account.image} 
-                            alt={account.name} 
-                            style={{ width: '100px', height: '150px', cursor: 'pointer' }} 
-                        />
-                        <p>{account.name}</p>
-                    </div>
-                ))}
+            <div
+                className={style.accountItem}
+                onClick={() => onKidSelect(kid.kidId)}
+            >
+                <KidImage style={{ width: '100px', height: '150px', cursor: 'pointer' }} />
+                <p>{kid.name}</p>
             </div>
         </div>
     );
 };
+
 export default SelectKidComponent;

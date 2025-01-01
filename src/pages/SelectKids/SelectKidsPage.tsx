@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import API from '@/api';
-import CardComponent from '@/pages/Main/component/CardComponent';
-import style from './SelectKidsPage.module.css';
 import SelectKidComponent from './component/SelectKidsComponent';
+import style from './component/SelectKidsComponent.module.css';
 
 interface Kid {
     kidId: string;
@@ -10,7 +9,6 @@ interface Kid {
     age: number;
     createdAt: string;
     updatedAt: string;
-    image: string; // Assuming each kid has an image URL
 }
 
 const SelectKidsPage: React.FC = () => {
@@ -29,15 +27,27 @@ const SelectKidsPage: React.FC = () => {
         fetchKids();
     }, []);
 
+    const handleKidSelection = async (kidId: string) => {
+        console.log(`Selected kidId: ${kidId}`);
+        try {
+            const response = await API.kidApi.tokenGenerate({kidId: kidId});
+            console.log('Token generated:', response.data);
+            // Perform additional actions with the token if needed
+        } catch (error) {
+            console.error('Error generating token:', error);
+        }
+    };
+
     return (
-        <div className={style.container}>
-            <h1 className={style.title}>아이 선택</h1>
-            <div className={style.kidsList}>
-                {kids.map(kid => (
-                    <SelectKidComponent/>
-                ))}
+            <div className={style.container}>
+                <h1 className={style.title}>✨그림을 그릴 아이를 선택해주세요✨</h1>
+                <div className={style.accountlist}>
+                    {kids.map(kid => (
+                        <SelectKidComponent key={kid.kidId} kid={kid} onKidSelect={handleKidSelection} />
+                    ))}
+                </div>
             </div>
-        </div>
+        
     );
 };
 
